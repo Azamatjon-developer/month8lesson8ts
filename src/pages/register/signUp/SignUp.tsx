@@ -1,78 +1,84 @@
-
+import SignUpImage from '../../../assets/images/SignUpLeft.png'
+import Google from '../../../assets/images/Google.png'
 const SignUp = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Create an Account
+    <div className="flex items-center bg-black">
+      <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
+        <h2 className="text-[30px] font-bold pt-[12px] pb-[32px] text-white text-center">
+          Create a new account
         </h2>
+        <p className="text-[#7878A3] text-center pv-[32px] text-[16px]">
+          To use snapgram, Please enter your details.
+        </p>
         <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+          <div className="placeholder:bg-black">
+            <label className="block text-[#EFEFEF] font-medium"> Name</label>
             <input
               type="text"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email Address</label>
+            <label className="block text-[#EFEFEF] font-medium"> Email</label>
             <input
               type="email"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              placeholder="Enter your name"
             />
           </div>
-
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-[#EFEFEF] font-medium">
+              {' '}
+              Username{' '}
+            </label>
+            <input
+              type="email"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              placeholder="Enter your name"
+            />
+          </div>
+          <div>
+            <label className="block text-[#EFEFEF] font-medium">
+              {' '}
+              Password{' '}
+            </label>
             <input
               type="password"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              placeholder="Enter your name"
             />
           </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="terms"
-                name="terms"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="terms"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                I agree to the terms and conditions
-              </label>
-            </div>
-          </div>
-
           <div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+            <button className="bg-[#877EFF] text-[#FFFFFF] py-[13px] mb-[20px] w-[400px] cursor-pointer font-semibold rounded-md">
               Sign Up
             </button>
+            <div className="flex items-center gap-[15px] justify-center pt-[12px] py-[13px] bg-white w-[400px]">
+              <img src={Google} alt="google" />
+              <p className="text-[#1F1F22] font-semibold "> Sign up with Google</p>
+            </div>
           </div>
-
-          <p className="text-sm text-gray-600 text-center">
-            Already have an account?{" "}
+          <p className="text-[16px] text-[#EFEFEF] text-center">
+            Don't have an account??{' '}
             <a
-              href="#"
-              className="text-blue-600 hover:text-blue-800 font-semibold"
+              href="/login"
+              className="text-[#877EFF] font-semibold"
             >
               Log in
             </a>
           </p>
         </form>
       </div>
+      <div className="w-[60%]">
+        <img
+          className="w-full h-[100vh]"
+          src={SignUpImage}
+          alt="signUp image"
+        />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

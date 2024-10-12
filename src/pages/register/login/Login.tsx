@@ -1,69 +1,68 @@
-
-const Login = () => {
+import SignUpImage from '../../../assets/images/SignUpLeft.png'
+import Google from '../../../assets/images/Google.png'
+import Snapgram from "../../../assets/images/Snap.svg"
+const SignUp = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Login to Your Account
-        </h2>
+    <div className="flex items-center bg-black">
+      <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
+          <div className='flex items-center justify-center mb-[68px] gap-5'>
+            <img src={Snapgram} alt="Snapgram" />
+            <h2 className='text-[#FFFFFF] font-bold text-[30px]'>Snapgram</h2>
+          </div>
+
+          <div className='text-center mb-[32px]'>
+            <h2 className='text-[#FFFFFF] text-[30px]'>Log in to your account</h2>
+            <p className='text-[#7878A3]'>Welcome back! Please enter your details.</p>
+          </div>
+      
         <form className="space-y-6">
+          <div className="placeholder:bg-black">
+            <label className="block text-[#EFEFEF] font-medium"> Email</label>
+            <input
+              type="text"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              placeholder="Enter your name"
+            />
+          </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email Address</label>
+            <label className="block text-[#EFEFEF] font-medium"> Password</label>
             <input
               type="email"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              placeholder="Enter your name"
             />
           </div>
-
+          
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                name="remember_me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-800">
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Sign In
+            <button className="bg-[#877EFF] text-[#FFFFFF] py-[13px] mb-[20px] w-[400px] cursor-pointer font-semibold rounded-md">
+              Login 
             </button>
+            <div className="flex items-center gap-[15px] justify-center pt-[12px] py-[13px] bg-white w-[400px]">
+              <img src={Google} alt="google" />
+              <p className="text-[#1F1F22] font-semibold "> Sign in with Google</p>
+            </div>
           </div>
-
-          <p className="text-sm text-gray-600 text-center">
-            Don't have an account?{" "}
-            <a href="#" className="text-blue-600 hover:text-blue-800 font-semibold">
-              Sign up
+          <p className="text-[16px] text-[#EFEFEF] text-center">
+          Don’t have an account?{' '}
+            <a
+              href="/"
+              className="text-[#877EFF] font-semibold"
+            >
+              Sign up 
             </a>
           </p>
         </form>
       </div>
+      <div className="w-[60%]">
+        <img
+          className="w-full h-[100vh]"
+          src={SignUpImage}
+          alt="signUp image"
+        />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default SignUp
