@@ -8,3 +8,11 @@ export interface Product{
   price: number
   images: string[]
 }
+
+export interface User {
+  full_name: string,
+  email:string,
+  username:string,
+  password: string,
+  photo: string | null,
+}

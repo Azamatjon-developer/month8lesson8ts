@@ -18,6 +18,7 @@ export const userApi = api.injectEndpoints({
         }),
         invalidatesTags: ["User"]
       }),
+      
 }),
 })
 

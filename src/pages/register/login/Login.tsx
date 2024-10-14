@@ -5,6 +5,7 @@ import { useLoginMutation } from '../../../redux/api/user-slice'
 import { useDispatch } from 'react-redux'
 import { setToken, setUser } from '../../../redux/slice/auth-slice'
 import { useNavigate } from 'react-router-dom'
+
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Login = () => {
             dispatch(setToken(res.accessToken))
             dispatch(setUser(res.user));
             navigate('/')
-          })
+          })  
         }}>
           <div className="placeholder:bg-black">
             <label className="block text-[#EFEFEF] font-medium"> Username</label>
@@ -64,7 +65,7 @@ const Login = () => {
           <p className="text-[16px] text-[#EFEFEF] text-center">
           Don’t have an account?{' '}
             <a
-              href="/"
+              href="/register"
               className="text-[#877EFF] font-semibold"
             >
               Sign up 

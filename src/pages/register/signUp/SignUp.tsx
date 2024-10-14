@@ -1,6 +1,35 @@
 import SignUpImage from '../../../assets/images/SignUpLeft.png'
 import Google from '../../../assets/images/Google.png'
+import { FormEvent } from 'react'
+import { User } from '../../../types'
+import { useRegisterMutation } from '../../../redux/api/user-slice'
+import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
+  const navigate = useNavigate()
+  const [createUser] = useRegisterMutation()
+  function handleFormSubmit(e: FormEvent) {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const full_name = formData.get('name') as string
+    const email = formData.get('email') as string
+    const username = formData.get('username') as string
+    const password = formData.get('password') as string
+    const data: User = {
+      full_name,
+      email,
+      username,
+      password,
+      photo: null,
+    }
+    console.log(data)
+    createUser(data)
+      .then((res) =>{
+        console.log(res)
+        navigate("/login")
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <div className="flex items-center bg-black">
       <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
@@ -10,13 +39,14 @@ const SignUp = () => {
         <p className="text-[#7878A3] text-center pv-[32px] text-[16px]">
           To use snapgram, Please enter your details.
         </p>
-        <form className="space-y-6">
+        <form onSubmit={handleFormSubmit} className="space-y-6">
           <div className="placeholder:bg-black">
             <label className="block text-[#EFEFEF] font-medium"> Name</label>
             <input
               type="text"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
+              name="name"
             />
           </div>
 
@@ -26,6 +56,7 @@ const SignUp = () => {
               type="email"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
+              name="email"
             />
           </div>
           <div>
@@ -37,6 +68,7 @@ const SignUp = () => {
               type="text"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
+              name="username"
             />
           </div>
           <div>
@@ -48,6 +80,7 @@ const SignUp = () => {
               type="password"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
+              name="password"
             />
           </div>
           <div>
@@ -56,15 +89,15 @@ const SignUp = () => {
             </button>
             <div className="flex items-center gap-[15px] justify-center pt-[12px] py-[13px] bg-white w-[400px]">
               <img src={Google} alt="google" />
-              <p className="text-[#1F1F22] font-semibold "> Sign up with Google</p>
+              <p className="text-[#1F1F22] font-semibold ">
+                {' '}
+                Sign up with Google
+              </p>
             </div>
           </div>
           <p className="text-[16px] text-[#EFEFEF] text-center">
             Don't have an account??{' '}
-            <a
-              href="/login"
-              className="text-[#877EFF] font-semibold"
-            >
+            <a href="/login" className="text-[#877EFF] font-semibold">
               Log in
             </a>
           </p>
