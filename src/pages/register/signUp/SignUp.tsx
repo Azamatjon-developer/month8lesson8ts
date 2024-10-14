@@ -34,7 +34,7 @@ const SignUp = () => {
               Username{' '}
             </label>
             <input
-              type="email"
+              type="text"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
               placeholder="Enter your name"
             />

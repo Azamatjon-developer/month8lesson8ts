@@ -1,14 +1,10 @@
-import { useContext } from 'react'
 import './App.css'
-import { Context } from './context/Context'
-import RegisterRoutes from './router/register'
-import { DashboardRoutes } from './router/dashboard'
+import RegisterRoutes from './router'
 
 function App() {
-  const context = useContext(Context)
   return (
     <>
-      {context?.token ? <DashboardRoutes/> : <RegisterRoutes/>}
+      { <RegisterRoutes/>}
     </>
   )
 }

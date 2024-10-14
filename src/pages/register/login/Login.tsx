@@ -1,7 +1,14 @@
 import SignUpImage from '../../../assets/images/SignUpLeft.png'
 import Google from '../../../assets/images/Google.png'
 import Snapgram from "../../../assets/images/Snap.svg"
-const SignUp = () => {
+import { useLoginMutation } from '../../../redux/api/user-slice'
+import { useDispatch } from 'react-redux'
+import { setToken, setUser } from '../../../redux/slice/auth-slice'
+import { useNavigate } from 'react-router-dom'
+const Login = () => {
+  const [loginUser, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="flex items-center bg-black">
       <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
@@ -15,22 +22,33 @@ const SignUp = () => {
             <p className='text-[#7878A3]'>Welcome back! Please enter your details.</p>
           </div>
       
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={(e) => {
+          e.preventDefault()
+          const formData = new FormData(e.currentTarget)
+          const formDataToJson = Object.fromEntries(formData)
+          loginUser(formDataToJson).unwrap().then((res) => {
+            dispatch(setToken(res.accessToken))
+            dispatch(setUser(res.user));
+            navigate('/')
+          })
+        }}>
           <div className="placeholder:bg-black">
-            <label className="block text-[#EFEFEF] font-medium"> Email</label>
+            <label className="block text-[#EFEFEF] font-medium"> Username</label>
             <input
               type="text"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
-              placeholder="Enter your name"
+              placeholder="Enter your username"
+              name='username'
             />
           </div>
 
           <div>
             <label className="block text-[#EFEFEF] font-medium"> Password</label>
             <input
-              type="email"
+              type="password"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
-              placeholder="Enter your name"
+              placeholder="Enter your password"
+              name="password"
             />
           </div>
           
@@ -65,4 +83,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login
