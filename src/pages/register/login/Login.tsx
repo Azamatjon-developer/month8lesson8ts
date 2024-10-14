@@ -7,7 +7,7 @@ import { setToken, setUser } from '../../../redux/slice/auth-slice'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const [loginUser, { isLoading }] = useLoginMutation();
+  const [loginUser] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
