@@ -4,16 +4,19 @@ import { FormEvent } from 'react'
 import { User } from '../../../types'
 import { useRegisterMutation } from '../../../redux/api/user-slice'
 import { useNavigate } from 'react-router-dom'
+
 const SignUp = () => {
   const navigate = useNavigate()
   const [createUser] = useRegisterMutation()
-  function handleFormSubmit(e: FormEvent) {
+
+  async function handleFormSubmit(e: FormEvent) {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
     const full_name = formData.get('name') as string
     const email = formData.get('email') as string
     const username = formData.get('username') as string
     const password = formData.get('password') as string
+
     const data: User = {
       full_name,
       email,
@@ -21,13 +24,14 @@ const SignUp = () => {
       password,
       photo: null,
     }
-    console.log(data)
-    createUser(data)
-      .then((res) =>{
-        console.log(res)
-        navigate("/login")
-      })
-      .catch((err) => console.log(err))
+
+    try {
+      const res = await createUser(data).unwrap() 
+      console.log(res)
+      navigate("/login") 
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -55,7 +59,7 @@ const SignUp = () => {
             <input
               type="email"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
-              placeholder="Enter your name"
+              placeholder="Enter your email"
               name="email"
             />
           </div>
@@ -67,7 +71,7 @@ const SignUp = () => {
             <input
               type="text"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
-              placeholder="Enter your name"
+              placeholder="Enter your username"
               name="username"
             />
           </div>
@@ -79,7 +83,7 @@ const SignUp = () => {
             <input
               type="password"
               className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
-              placeholder="Enter your name"
+              placeholder="Enter your password"
               name="password"
             />
           </div>
@@ -96,16 +100,17 @@ const SignUp = () => {
             </div>
           </div>
           <p className="text-[16px] text-[#EFEFEF] text-center">
-            Don't have an account??{' '}
+            Already have an account?{' '}
             <a href="/login" className="text-[#877EFF] font-semibold">
               Log in
             </a>
           </p>
         </form>
       </div>
+
       <div className="w-[60%]">
         <img
-          className="w-full h-[100vh]"
+          className="w-[90%] h-[100vh] object-cover"
           src={SignUpImage}
           alt="signUp image"
         />
