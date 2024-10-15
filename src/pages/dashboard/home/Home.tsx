@@ -5,7 +5,7 @@ import TopCreators from '../../../components/topCreators/TopCreators'
 const Home = () => {
   return (
     <div className="flex h-screen">
-      <div className="w-[250px] fixed h-full">
+      <div className="w-[20%] fixed">
         <Sidebar />
       </div>
 
@@ -14,7 +14,7 @@ const Home = () => {
         <Outlet />
       </div>
 
-      <div className="w-[400px] fixed right-0 h-full pr-4 bg-black">
+      <div className="w-[20%] fixed right-0 h-full pr-4 bg-black">
         <div className="text-white text-center">
           <TopCreators />
         </div>
@@ -22,5 +22,4 @@ const Home = () => {
     </div>
   )
 }
-
 export default Home
