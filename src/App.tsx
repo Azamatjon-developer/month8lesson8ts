@@ -1,10 +1,16 @@
 import './App.css'
+import Sidebar from './components/sidebar/Sidebar'
+import TopCreators from './components/topCreators/TopCreators'
 import RegisterRoutes from './router'
 
 function App() {
   return (
     <>
-      { <RegisterRoutes/>}
+      <div className='h-[100vh]'>
+        <Sidebar />
+        {<RegisterRoutes />}
+        <TopCreators />
+      </div>
     </>
   )
 }
