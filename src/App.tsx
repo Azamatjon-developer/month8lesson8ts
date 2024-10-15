@@ -4,12 +4,18 @@ import TopCreators from './components/topCreators/TopCreators'
 import RegisterRoutes from './router'
 
 function App() {
+
+  const login: string | null = localStorage.getItem("x-auth-token")
   return (
     <>
-      <div className='h-[100vh]'>
-        <Sidebar />
+      <div >
+      {
+      login ?  <Sidebar /> : null
+        
+      } 
         {<RegisterRoutes />}
-        <TopCreators />
+        {login ? <TopCreators /> : null }
+        
       </div>
     </>
   )

@@ -34,6 +34,9 @@ const SignUp = () => {
     }
   }
 
+
+
+
   return (
     <div className="flex items-center bg-black">
       <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">

@@ -18,6 +18,13 @@ export const userApi = api.injectEndpoints({
         }),
         invalidatesTags: ["User"]
       }),
+      getAllUsers: build.query({
+        query: ()=> ({
+          url:"/api/user/all?limit=100",
+          method: "GET"
+        }),
+        providesTags: ["User"]
+      })
       
 }),
 })
@@ -25,5 +32,6 @@ export const userApi = api.injectEndpoints({
 export const {
   useRegisterMutation,
   useLoginMutation,
+  useGetAllUsersQuery,
 } = userApi
 

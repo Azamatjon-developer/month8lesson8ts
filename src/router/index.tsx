@@ -21,14 +21,6 @@ const RegisterRoutes = () => {
 
   return useRoutes([
     {
-      path: '/',
-      element: (
-        <Suspense>
-          <Home />
-        </Suspense>
-      ),
-    },
-    {
       path: '/register',
       element: (
         <Suspense>
@@ -45,69 +37,82 @@ const RegisterRoutes = () => {
       ),
     },
     {
-      path:"/explore",
-      element:(
+      path: '/',
+      element: (
         <Suspense>
-          <Explore/>
+          <Home />
         </Suspense>
-      )
+      ),
+
+      children:[
+
+        {
+          path:"/explore",
+          element:(
+            <Suspense>
+              <Explore/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/people",
+          element:(
+            <Suspense>
+              <People/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/saved",
+          element:(
+            <Suspense>
+              <Saved/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/reels",
+          element:(
+            <Suspense>
+              <Reels/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/chats",
+          element:(
+            <Suspense>
+              <Chats/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/createPosts",
+          element:(
+            <Suspense>
+              <CreatePosts/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/logOut",
+          element:(
+            <Suspense>
+              <LogOut/>
+            </Suspense>
+          )
+        },
+        {
+          path:"/settings",
+          element:(
+            <Suspense>
+              <Settings/>
+            </Suspense>
+          )
+        }
+      ]
     },
-    {
-      path:"/people",
-      element:(
-        <Suspense>
-          <People/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/saved",
-      element:(
-        <Suspense>
-          <Saved/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/reels",
-      element:(
-        <Suspense>
-          <Reels/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/chats",
-      element:(
-        <Suspense>
-          <Chats/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/createPosts",
-      element:(
-        <Suspense>
-          <CreatePosts/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/logOut",
-      element:(
-        <Suspense>
-          <LogOut/>
-        </Suspense>
-      )
-    },
-    {
-      path:"/settings",
-      element:(
-        <Suspense>
-          <Settings/>
-        </Suspense>
-      )
-    }
+   
   ])
 }
 
