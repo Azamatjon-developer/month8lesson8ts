@@ -3,7 +3,7 @@ import { useGetAllUsersQuery } from '../../redux/api/user-slice'
 const TopCreators = () => {
   const { data = [] } = useGetAllUsersQuery(true)
   return (
-    <div className='col-span-4'>
+    <div className='col-span-3'>
       <div className="text-[#ffffff]  text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
         <h2>TopCreators</h2>
       </div>
