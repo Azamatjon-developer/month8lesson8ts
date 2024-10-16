@@ -5,12 +5,14 @@ import { useLoginMutation } from '../../../redux/api/user-slice'
 import { useDispatch } from 'react-redux'
 import { setToken, setUser } from '../../../redux/slice/auth-slice'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { Context } from '../../../context/Context'
 
 const Login = () => {
   const [loginUser] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const context = useContext(Context)
 
 
   return  (
@@ -33,6 +35,7 @@ const Login = () => {
           loginUser(formDataToJson).unwrap().then((res) => {
             dispatch(setToken(res.accessToken))
             dispatch(setUser(res.user));
+            context?.setToken(res.accessToken)
             navigate('/')
           })  
         }}>

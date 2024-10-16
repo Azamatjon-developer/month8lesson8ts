@@ -3,7 +3,7 @@ import snap from '../../assets/images/Snap.svg'
 
 const Sidebar = () => {
   return (
-    <div className="w-[400px] bg-black h-[100vh]">
+    <div className="col-span-2 bg-black h-[100vh]">
       <div className="pt-[48px] pl-[24px] pr-[24px] pb-[44px]">
         <div className="flex items-center gap-[5px]">
           <img src={snap} alt="snap" />

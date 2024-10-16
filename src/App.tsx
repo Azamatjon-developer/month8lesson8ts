@@ -1,24 +1,12 @@
+import { useContext } from 'react'
 import './App.css'
-import Sidebar from './components/sidebar/Sidebar'
-import TopCreators from './components/topCreators/TopCreators'
+import { Context } from './context/Context'
+import DashboardRoutes from './router/Dashboard'
 import RegisterRoutes from './router'
 
 function App() {
-
-  const login: string | null = localStorage.getItem("x-auth-token")
-  return (
-    <>
-      <div >
-      {
-      login ?  <Sidebar /> : null
-        
-      } 
-        {<RegisterRoutes />}
-        {login ? <TopCreators /> : null }
-        
-      </div>
-    </>
-  )
+  const context = useContext(Context)
+  return <>{context?.token ? <DashboardRoutes /> : <RegisterRoutes />}</>
 }
 
 export default App
