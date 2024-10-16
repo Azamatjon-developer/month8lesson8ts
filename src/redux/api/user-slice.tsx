@@ -24,6 +24,11 @@ export const userApi = api.injectEndpoints({
           method: "GET"
         }),
         providesTags: ["User"]
+      }),
+      getUser: build.query({
+        query: (username)=> ({
+          url:`/api/user/profile/${username}`,          
+        }),
       })
       
 }),
@@ -33,5 +38,6 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useGetAllUsersQuery,
+  useGetUserQuery
 } = userApi
 

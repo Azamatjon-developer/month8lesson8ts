@@ -14,7 +14,6 @@ const Login = () => {
   const navigate = useNavigate();
   const context = useContext(Context)
 
-
   return  (
     <div className="flex items-center bg-black">
       <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
@@ -37,8 +36,11 @@ const Login = () => {
             dispatch(setUser(res.user));
             context?.setToken(res.accessToken)
             navigate('/')
-          })  
+          })
+          window.localStorage.setItem('userData', JSON.stringify(formDataToJson))
+          console.log(formDataToJson)
         }}>
+
           <div className="placeholder:bg-black">
             <label className="block text-[#EFEFEF] font-medium"> Username</label>
             <input
