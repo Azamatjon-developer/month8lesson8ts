@@ -5,8 +5,11 @@ import HomeIcon from "../../assets/images/HomeIcon.svg"
 import ExploreIcon from "../../assets/images/ExploreIcon.svg"
 import PeopleIcon from "../../assets/images/PeopleIcon.svg"
 import SavedIcon from "../../assets/images/SavedIcon.svg"
-// import ReelsIcon from "../../assets/images/ReelsIcon.svg"
-// import ChatsIcon from "../../assets/images/ChatsIcon.svg"
+import ReelsIcon from "../../assets/images/ReelsIcon.svg"
+import ChatsIcon from "../../assets/images/ChatsIcon.svg"
+import createIcon from "../../assets/images/CreatePostIcon.svg"
+import logOut from "../../assets/images/LogOutIcon.svg"
+import settings from "../../assets/images/SettingsIcon.svg"
 const Sidebar = () => {
   const userData = JSON.parse(localStorage.getItem('userData') || '{}')
   const username = userData?.username || ''
@@ -41,20 +44,26 @@ const Sidebar = () => {
           Saved 
         </NavLink>
         
-        <NavLink className={'text-white'} to={'/reels'}>
-          Reels
+        <NavLink className={'text-white flex items-center gap-2'} to={'/reels'}>
+        <img src={ReelsIcon} alt="reels" />
+          Reels 
         </NavLink>
-        <NavLink className={'text-white'} to={'/chats'}>
-          Chats
+        <NavLink className={'text-white flex items-center gap-2'} to={'/chats'}>
+        <img src={ChatsIcon} alt="reels" />
+        Chats
         </NavLink>
-        <NavLink className={'text-white pb-[120px]'} to={'/createPosts'}>
-          Create Post
+        <NavLink className={'text-white flex items-center gap-2 mb-[108px]'} to={'/createPosts'}>
+        <img src={createIcon} alt="reels" />
+        Create Post
         </NavLink>
-        <NavLink className={'text-white'} to={'/logOut'}>
-          Log Out
+
+        <NavLink className={'text-white flex items-center gap-2'} to={'/logOut'}>
+        <img src={logOut} alt="reels" />
+        LogOut
         </NavLink>
-        <NavLink className={'text-white'} to={'/settings'}>
-          Settings
+        <NavLink className={'text-white flex items-center gap-2'} to={'/settings'}>
+        <img src={settings} alt="reels" />
+        Settings 
         </NavLink>
       </div>
     </div>
