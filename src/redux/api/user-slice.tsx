@@ -1,4 +1,4 @@
-import { api } from './index';
+import { api } from './index'
 
 export const userApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -23,7 +23,7 @@ export const userApi = api.injectEndpoints({
         url: '/api/user/all',
         method: 'GET',
       }),
-      providesTags: [{type: 'User'}],
+      providesTags: [{ type: 'User' }],
     }),
     getUser: build.query({
       query: (username) => ({
@@ -48,10 +48,26 @@ export const userApi = api.injectEndpoints({
       query: (username) => ({
         url: `/api/user/profile/${username}`,
       }),
-      providesTags: [{ type: 'User'}],
-    })
+      providesTags: [{ type: 'User' }],
+    }),
+    createPost: build.mutation({
+      query: (body) => ({
+        url: '/api/post',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+    uploadFiles: build.mutation({
+      query: (body) => ({
+        url: '/api/upload/files',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
   }),
-});
+})
 
 export const {
   useRegisterMutation,
@@ -59,6 +75,8 @@ export const {
   useGetAllUsersQuery,
   useGetUserQuery,
   useFollowMutation,
-  useUnfollowMutation, 
-  useGetUserByUsernameQuery
-} = userApi;
+  useUnfollowMutation,
+  useGetUserByUsernameQuery,
+  useCreatePostMutation,
+  useUploadFilesMutation,
+} = userApi
