@@ -12,28 +12,23 @@ const CreatePosts = () => {
   const [caption, setCaption] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [altText, setAltText] = useState<string>('');
-
-  const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      imagesOrVideos.forEach((file) => formData.append('files', file));
-
-      const response = await uploadFiles(formData).unwrap();
-      console.log('Upload successful:', response);
-    } catch (error) {
-      console.error('Upload failed:', error);
-    }
-  };
+  // const [savedFiles, setSavedFiles] = useState<string[]>([]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
+      const formData = new FormData();
+      imagesOrVideos.forEach((file) => formData.append('files', file));
+
+      const uploadResponse = await uploadFiles(formData).unwrap();
+      const fileUrls = uploadResponse.map((file: any) => file.url); 
+
       const newPost = {
         caption,
         location,
-        altText,
-        media: imagesOrVideos.map((file) => file.name), // Assuming media filenames are stored
+        content_alt: altText,
+        content: fileUrls, 
       };
 
       await createPost(newPost).unwrap();
@@ -86,7 +81,7 @@ const CreatePosts = () => {
                     )}
                     <button
                       type="button"
-                      className="absolute bottom-0 left-0 bg-red-500 text-white p-2"
+                      className="absolute bottom-0 left-0 bg-red-500 rounded-2xl pt-2 text-white p-2"
                       onClick={() =>
                         setImagesOrVideos(
                           imagesOrVideos.filter((_, index) => index !== inx)
@@ -102,7 +97,7 @@ const CreatePosts = () => {
                 <button
                   type="button"
                   className="font-semibold py-3 h-fit px-[20px] bg-[#877EFF] w-fit mt-auto ml-auto rounded-lg"
-                  onClick={handleUpload}
+                  onClick={handleFormSubmit}
                 >
                   {isLoading ? 'Uploading...' : 'Upload'}
                 </button>
