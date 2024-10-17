@@ -153,7 +153,7 @@ const CreatePosts = () => {
         </label>
         <label className="flex flex-col gap-3">
           <span className="font-medium text-lg">Add Location</span>
-          <div className="bg-dark-300 flex items-center p-2 justify-between">
+          <div className="bg-black flex items-center p-2 justify-between">
             <input
               name="location"
               required
