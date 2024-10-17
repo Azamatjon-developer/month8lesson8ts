@@ -7,7 +7,6 @@ import Saved from '../../pages/dashboard/saved/Saved'
 import Reels from '../../pages/dashboard/reels/Reels'
 import Chats from '../../pages/dashboard/chats/Chats'
 import CreatePosts from '../../pages/dashboard/createPost/CreatePosts'
-import LogOut from '../../pages/dashboard/logOut/LogOut'
 import Settings from '../../pages/dashboard/settings/Settings'
 
 const DashboardRoutes = () => {
@@ -23,7 +22,6 @@ const DashboardRoutes = () => {
           <Route path="/reels" element={<Reels />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/createPosts" element={<CreatePosts />} />
-          <Route path="/logOut" element={<LogOut />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>

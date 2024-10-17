@@ -7,16 +7,20 @@ import {
 
 const TopCreators = () => {
   const { data = [] } = useGetAllUsersQuery(true)
-  const [followUser] = useFollowMutation()
-  const [unfollowUser] = useUnfollowMutation()
+  const [followUser, { isLoading: isFollowLoading }] = useFollowMutation()
+  const [unfollowUser, { isLoading: isUnfollowLoading }] = useUnfollowMutation()
+  
   const currentusername =
     window.localStorage.getItem('user-data') !== null
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
       : null
+  
   const { data: userData } = useGetUserByUsernameQuery(currentusername)
+
   const handleFollowUser = (username: string): void => {
     followUser(username)
   }
+
   const handleUnfollowUser = (username: string): void => {
     unfollowUser(username)
   }
@@ -24,7 +28,7 @@ const TopCreators = () => {
   return (
     <div className="col-span-3 text-white">
       <div className="text-[#ffffff]  text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
-        <h2>TopCreators</h2>
+        <h2>Top Creators</h2>
       </div>
       <div className="flex">
         <div className="grid grid-cols-12">
@@ -40,15 +44,17 @@ const TopCreators = () => {
                   <button
                     className="bg-red-500 rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
                     onClick={() => handleUnfollowUser(user.username)}
+                    disabled={isUnfollowLoading}  // Disable button while loading
                   >
-                    unfollow
+                    {isUnfollowLoading ? 'Unfollowing...' : 'Unfollow'}
                   </button>
                 ) : (
                   <button
                     className="bg-[#877EFF] rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
                     onClick={() => handleFollowUser(user.username)}
+                    disabled={isFollowLoading}  
                   >
-                    follow
+                    {isFollowLoading ? 'Following...' : 'Follow'}
                   </button>
                 )}
               </div>
