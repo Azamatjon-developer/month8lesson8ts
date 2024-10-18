@@ -15,23 +15,18 @@ import { Modal } from 'antd';
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     window.localStorage.clear();
     window.location.reload();
     window.location.href = "/";
-
     setIsModalOpen(false);
   };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
   const userData = JSON.parse(localStorage.getItem('userData') || '{}');
   const username = userData?.username || '';
   const { data } = useGetUserQuery(username);
@@ -58,7 +53,6 @@ const Sidebar = () => {
           <img src={HomeIcon} alt="home" className="w-6 h-6" />
           Home
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -68,7 +62,6 @@ const Sidebar = () => {
           <img src={ExploreIcon} alt="explore" className="w-6 h-6" />
           Explore
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -78,7 +71,6 @@ const Sidebar = () => {
           <img src={PeopleIcon} alt="people" className="w-6 h-6" />
           People
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -88,7 +80,6 @@ const Sidebar = () => {
           <img src={SavedIcon} alt="saved" className="w-6 h-6" />
           Saved
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -98,7 +89,6 @@ const Sidebar = () => {
           <img src={ReelsIcon} alt="reels" className="w-6 h-6" />
           Reels
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -108,7 +98,6 @@ const Sidebar = () => {
           <img src={ChatsIcon} alt="chats" className="w-6 h-6" />
           Chats
         </NavLink>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] mb-16 transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
@@ -118,8 +107,6 @@ const Sidebar = () => {
           <img src={createIcon} alt="create post" className="w-6 h-6" />
           Create Post
         </NavLink>
-
-        {/** Logout and Settings */}
         <div
           onClick={showModal}
           className="text-white flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#4b48e5] transition duration-300"
@@ -127,7 +114,6 @@ const Sidebar = () => {
           <img src={logOut} alt="logout" className="w-6 h-6" />
           Log Out
         </div>
-
         <NavLink
           className={({ isActive }) =>
             `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF] rounded-xl' : ''}`
@@ -137,7 +123,6 @@ const Sidebar = () => {
           <img src={settings} alt="settings" className="w-6 h-6" />
           Settings
         </NavLink>
-
         <Modal
           title="Are you sure you want to log out?"
           open={isModalOpen}
