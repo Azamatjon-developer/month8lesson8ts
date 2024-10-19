@@ -70,10 +70,18 @@ export const userApi = api.injectEndpoints({
       query: () => ({
         url: '/api/user/feed?limit=3000'
       })
-    })
+    }),
+    getUserName: build.query({
+      query: () => ({
+        url: '/api/user/profile',
+      }),
+      providesTags: [{ type: 'User' }],
+  
   }),
 })
+})
 
+// /api/user/profile/
 export const {
   useRegisterMutation,
   useLoginMutation,
@@ -84,5 +92,8 @@ export const {
   useGetUserByUsernameQuery,
   useCreatePostMutation,
   useUploadFilesMutation,
-  useGetFeedQuery
+  useGetFeedQuery,
+  useGetUserNameQuery,
+  
+  
 } = userApi

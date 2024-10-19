@@ -5,9 +5,10 @@ import Explore from '../../pages/dashboard/explore/Explore'
 import People from '../../pages/dashboard/people/People'
 import Saved from '../../pages/dashboard/saved/Saved'
 import Reels from '../../pages/dashboard/reels/Reels'
-import Chats from '../../pages/dashboard/chats/Chats'
 import CreatePosts from '../../pages/dashboard/createPost/CreatePosts'
 import Settings from '../../pages/dashboard/settings/Settings'
+import Chats from '../../pages/dashboard/chats/Chats'
+import Profile from '../../pages/dashboard/profile/Profile'
 
 const DashboardRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const DashboardRoutes = () => {
           <Route path="/chats" element={<Chats />} />
           <Route path="/createPosts" element={<CreatePosts />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </main>

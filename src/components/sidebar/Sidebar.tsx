@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import snap from '../../assets/images/Snap.svg'
 import { useGetUserQuery } from '../../redux/api/user-slice'
 import HomeIcon from '../../assets/images/HomeIcon.svg'
@@ -32,16 +32,19 @@ const Sidebar = () => {
   const { data } = useGetUserQuery(username)
 
   return (
-    <div className="col-span-2 bg-[#1c1c1c] rounded-xl shadow-lg overflow-y-auto h-screen">
+    <div className="col-span-2 bg-[#1c1c1c] shadow-lg overflow-y-auto h-screen">
       <div className="pt-12 px-6 pb-10">
         <div className="flex items-center gap-2 mb-6">
           <img src={snap} alt="snap" className="w-8 h-8" />
           <h2 className="text-white text-2xl font-bold">Sidebar</h2>
         </div>
+        <Link to="/profile" >
         <div className="text-center">
           <h3 className="text-white font-semibold text-lg">{data?.fullName}</h3>
           <p className="text-slate-400 font-medium text-sm">{data?.username}</p>
         </div>
+        </Link>
+      
       </div>
       <div className="flex flex-col gap-4 px-6">
         <NavLink
