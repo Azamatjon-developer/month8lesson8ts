@@ -26,7 +26,6 @@ const People = () => {
       } else {
         await followUser(userId);
       }
-      // After the follow/unfollow action, refetch users to update the UI
       refetch();
     } catch (error) {
       console.error('Failed to follow/unfollow user', error);
@@ -48,7 +47,7 @@ const People = () => {
           >
             <div>
               <h2 className="text-xl font-semibold mb-2">Name: {user.fullName}</h2>
-              <h3 className="text-lg text-gray-400 mb-4">Username: {user.username}</h3>
+              <h3 className="text-lg text-gray-400 mb-4">Username and : {user.username}</h3>
             </div>
 
             <button
