@@ -7,28 +7,36 @@ import {
 
 const CreatePosts = () => {
   const [uploadFiles, { isLoading }] = useUploadFilesMutation();
+  const [uploadedFiles, setUploadedFiles] = useState<[]>([]);
   const [createPost] = useCreatePostMutation();
   const [imagesOrVideos, setImagesOrVideos] = useState<File[]>([]);
   const [caption, setCaption] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [altText, setAltText] = useState<string>('');
   // const [savedFiles, setSavedFiles] = useState<string[]>([]);
+  
+  const handleUplodFiles = async () => {
+    const formData = new FormData();
+    imagesOrVideos.forEach((file) => formData.append('files', file));
+  
+    const uploadResponse = await uploadFiles(formData).unwrap();
+    const fileUrls = uploadResponse.files.map((file: [{url:string}]) => file[0].url);
+    setUploadedFiles(fileUrls);
+
+  }
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const formData = new FormData();
-      imagesOrVideos.forEach((file) => formData.append('files', file));
-
-      const uploadResponse = await uploadFiles(formData).unwrap();
-      const fileUrls = uploadResponse.map((file: any) => file.url); 
-
+      console.log('====================================');
+      console.log(uploadedFiles);
+      console.log('====================================');
       const newPost = {
         caption,
         location,
         content_alt: altText,
-        content: fileUrls, 
+        content: uploadedFiles, 
       };
 
       await createPost(newPost).unwrap();
@@ -97,7 +105,7 @@ const CreatePosts = () => {
                 <button
                   type="button"
                   className="font-semibold py-3 h-fit px-[20px] bg-[#877EFF] w-fit mt-auto ml-auto rounded-lg"
-                  onClick={handleFormSubmit}
+                  onClick={handleUplodFiles}
                 >
                   {isLoading ? 'Uploading...' : 'Upload'}
                 </button>

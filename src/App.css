@@ -4,3 +4,7 @@
     border: none;
 
 }
+
+::-webkit-scrollbar{
+    display: none !important;
+}

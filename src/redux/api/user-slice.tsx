@@ -66,6 +66,11 @@ export const userApi = api.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
+    getFeed: build.query({
+      query: () => ({
+        url: '/api/user/feed?limit=3000'
+      })
+    })
   }),
 })
 
@@ -79,4 +84,5 @@ export const {
   useGetUserByUsernameQuery,
   useCreatePostMutation,
   useUploadFilesMutation,
+  useGetFeedQuery
 } = userApi

@@ -26,7 +26,7 @@ const TopCreators = () => {
   }
 
   return (
-    <div className="col-span-3 text-white">
+    <div className={`col-span-3 text-white sticky top-0 h-screen overflow-y-auto`}>
       <div className="text-[#ffffff]  text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
         <h2>Top Creators</h2>
       </div>

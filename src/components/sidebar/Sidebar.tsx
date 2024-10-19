@@ -1,41 +1,41 @@
-import { NavLink } from 'react-router-dom';
-import snap from '../../assets/images/Snap.svg';
-import { useGetUserQuery } from '../../redux/api/user-slice';
-import HomeIcon from "../../assets/images/HomeIcon.svg";
-import ExploreIcon from "../../assets/images/ExploreIcon.svg";
-import PeopleIcon from "../../assets/images/PeopleIcon.svg";
-import SavedIcon from "../../assets/images/SavedIcon.svg";
-import ReelsIcon from "../../assets/images/ReelsIcon.svg";
-import ChatsIcon from "../../assets/images/ChatsIcon.svg";
-import createIcon from "../../assets/images/CreatePostIcon.svg";
-import logOut from "../../assets/images/LogOutIcon.svg";
-import settings from "../../assets/images/SettingsIcon.svg";
-import { useState } from 'react';
-import { Modal } from 'antd';
+import { NavLink } from 'react-router-dom'
+import snap from '../../assets/images/Snap.svg'
+import { useGetUserQuery } from '../../redux/api/user-slice'
+import HomeIcon from '../../assets/images/HomeIcon.svg'
+import ExploreIcon from '../../assets/images/ExploreIcon.svg'
+import PeopleIcon from '../../assets/images/PeopleIcon.svg'
+import SavedIcon from '../../assets/images/SavedIcon.svg'
+import ReelsIcon from '../../assets/images/ReelsIcon.svg'
+import ChatsIcon from '../../assets/images/ChatsIcon.svg'
+import createIcon from '../../assets/images/CreatePostIcon.svg'
+import logOut from '../../assets/images/LogOutIcon.svg'
+import settings from '../../assets/images/SettingsIcon.svg'
+import { useState } from 'react'
+import { Modal } from 'antd'
 
 const Sidebar = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const showModal = () => {
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true)
+  }
   const handleOk = () => {
-    window.localStorage.clear();
-    window.location.reload();
-    window.location.href = "/";
-    setIsModalOpen(false);
-  };
+    window.localStorage.clear()
+    window.location.reload()
+    window.location.href = '/'
+    setIsModalOpen(false)
+  }
   const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-  const username = userData?.username || '';
-  const { data } = useGetUserQuery(username);
+    setIsModalOpen(false)
+  }
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}')
+  const username = userData?.username || ''
+  const { data } = useGetUserQuery(username)
 
   return (
     <div className="col-span-2 bg-[#1c1c1c] rounded-xl shadow-lg overflow-y-auto h-screen">
       <div className="pt-12 px-6 pb-10">
         <div className="flex items-center gap-2 mb-6">
-          <img src={snap} alt="snap" className="w-8 h-8"/>
+          <img src={snap} alt="snap" className="w-8 h-8" />
           <h2 className="text-white text-2xl font-bold">Sidebar</h2>
         </div>
         <div className="text-center">
@@ -46,7 +46,9 @@ const Sidebar = () => {
       <div className="flex flex-col gap-4 px-6">
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/'}
         >
@@ -55,7 +57,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/explore'}
         >
@@ -64,7 +68,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/people'}
         >
@@ -73,7 +79,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/saved'}
         >
@@ -82,7 +90,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/reels'}
         >
@@ -91,7 +101,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/chats'}
         >
@@ -100,7 +112,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] mb-16 transition duration-300 ${isActive ? 'bg-[#877EFF]' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] mb-16 transition duration-300 ${
+              isActive ? 'bg-[#877EFF]' : ''
+            }`
           }
           to={'/createPosts'}
         >
@@ -116,7 +130,9 @@ const Sidebar = () => {
         </div>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${isActive ? 'bg-[#877EFF] rounded-xl' : ''}`
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+              isActive ? 'bg-[#877EFF] rounded-xl' : ''
+            }`
           }
           to={'/settings'}
         >
@@ -133,7 +149,7 @@ const Sidebar = () => {
         </Modal>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
