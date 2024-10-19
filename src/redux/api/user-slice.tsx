@@ -81,7 +81,6 @@ export const userApi = api.injectEndpoints({
 })
 })
 
-// /api/user/profile/
 export const {
   useRegisterMutation,
   useLoginMutation,
@@ -94,6 +93,6 @@ export const {
   useUploadFilesMutation,
   useGetFeedQuery,
   useGetUserNameQuery,
-  
+
   
 } = userApi
