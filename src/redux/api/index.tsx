@@ -18,7 +18,6 @@ const baseQuery = async (args: any, api: any, extraOptions: any) => {
     const { status } = result.error;
     if (status === 401 || status === 403) {
       console.error('Unauthorized access - Redirecting to login...');
-      // dispatch(logout())
     }
   }
   return result;
