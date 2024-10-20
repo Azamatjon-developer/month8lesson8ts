@@ -6,9 +6,9 @@ import {
 } from '../../../redux/api/user-slice';
 import userIcon from '../../../assets/images/UsersIcon.svg';
 const People = () => {
-  const { data: users, refetch } = useGetAllUsersQuery({});
-  const [followUser, { isLoading: isFollowLoading }] = useFollowMutation();
-  const [unfollowUser, { isLoading: isUnfollowLoading }] = useUnfollowMutation();
+  const { data: users } = useGetAllUsersQuery({});
+  const [followUser] = useFollowMutation();
+  const [unfollowUser] = useUnfollowMutation();
   const currentUsername =
     window.localStorage.getItem('user-data') !== null
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
