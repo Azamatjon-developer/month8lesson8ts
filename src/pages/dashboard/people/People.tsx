@@ -5,33 +5,17 @@ import {
   useGetUserByUsernameQuery,
 } from '../../../redux/api/user-slice';
 import userIcon from '../../../assets/images/UsersIcon.svg';
-
 const People = () => {
   const { data: users, refetch } = useGetAllUsersQuery({});
-  
   const [followUser, { isLoading: isFollowLoading }] = useFollowMutation();
   const [unfollowUser, { isLoading: isUnfollowLoading }] = useUnfollowMutation();
-
   const currentUsername =
     window.localStorage.getItem('user-data') !== null
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
       : null;
-
   const { data: userData } = useGetUserByUsernameQuery(currentUsername);
-
-  const handleFollow = async (userId: string, isFollowing: boolean): Promise<void> => {
-    try {
-      if (isFollowing) {
-        await unfollowUser(userId);
-      } else {
-        await followUser(userId);
-      }
-      refetch();
-    } catch (error) {
-      console.error('Failed to follow/unfollow user', error);
-    }
-  };
-
+  console.log(userData)
+  console.log(users)
   return (
     <div className="bg-[#000000] pt-[80px] pl-[60px] h-screen overflow-y-auto">
       <div className="flex items-center gap-4 text-white mb-8">
@@ -50,26 +34,11 @@ const People = () => {
               <h3 className="text-lg text-gray-400 mb-4">Username and : {user.username}</h3>
             </div>
 
-            <button
-              className={`rounded-md pt-[10px] pb-[10px] transition-all ${
-                user.isFollowing
-                  ? 'bg-red-600 hover:bg-red-700'
-                  : 'bg-[#877EFF] hover:bg-[#6C64E8]'
-              }`}
-              onClick={() => handleFollow(user._id, user.isFollowing)}
-              disabled={isFollowLoading || isUnfollowLoading}
-            >
-              {(isFollowLoading || isUnfollowLoading) && user._id === userData?.id
-                ? 'Processing...'
-                : user.isFollowing
-                ? 'Unfollow'
-                : 'Follow'}
-            </button>
+            {(userData.following?.some((item:any) => user._id === item._id)) ? <button onClick={() => unfollowUser(user.username)} className='bg-red-400 text-white p-2 rounded-md'>unfollow</button> : <button className='bg-sky-400 text-white p-2 rounded-md' onClick={() => followUser(user.username)}>follow</button>}
           </div>
         ))}
       </div>
     </div>
   );
 };
-
 export default People;
