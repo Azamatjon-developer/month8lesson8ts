@@ -11,7 +11,6 @@ const TopCreators = () => {
   const [followUser] = useFollowMutation()
   const [unfollowUser] = useUnfollowMutation()
 
-  // Track loading state for each user
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null)
   
   const currentusername =
@@ -22,20 +21,20 @@ const TopCreators = () => {
   const { data: userData } = useGetUserByUsernameQuery(currentusername)
 
   const handleFollowUser = async (username: string): Promise<void> => {
-    setLoadingUserId(username)  // Set loading for this user
+    setLoadingUserId(username)
     try {
       await followUser(username)
     } finally {
-      setLoadingUserId(null)  // Clear loading state after completion
+      setLoadingUserId(null)  
     }
   }
 
   const handleUnfollowUser = async (username: string): Promise<void> => {
-    setLoadingUserId(username)  // Set loading for this user
+    setLoadingUserId(username)  
     try {
       await unfollowUser(username)
     } finally {
-      setLoadingUserId(null)  // Clear loading state after completion
+      setLoadingUserId(null)  
     }
   }
 
@@ -58,7 +57,7 @@ const TopCreators = () => {
                   <button
                     className="bg-red-500 rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
                     onClick={() => handleUnfollowUser(user.username)}
-                    disabled={loadingUserId === user.username}  // Disable button while loading for this user
+                    disabled={loadingUserId === user.username}  
                   >
                     {loadingUserId === user.username ? 'Unfollowing...' : 'Unfollow'}
                   </button>
@@ -66,7 +65,7 @@ const TopCreators = () => {
                   <button
                     className="bg-[#877EFF] rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
                     onClick={() => handleFollowUser(user.username)}
-                    disabled={loadingUserId === user.username}  // Disable button while loading for this user
+                    disabled={loadingUserId === user.username}
                   >
                     {loadingUserId === user.username ? 'Following...' : 'Follow'}
                   </button>
