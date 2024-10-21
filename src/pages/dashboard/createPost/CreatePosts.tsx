@@ -13,7 +13,6 @@ const CreatePosts = () => {
   const [caption, setCaption] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [altText, setAltText] = useState<string>('');
-  // const [savedFiles, setSavedFiles] = useState<string[]>([]);
   
   const handleUplodFiles = async () => {
     const formData = new FormData();
@@ -29,9 +28,6 @@ const CreatePosts = () => {
     e.preventDefault();
 
     try {
-      console.log('====================================');
-      console.log(uploadedFiles);
-      console.log('====================================');
       const newPost = {
         caption,
         location,

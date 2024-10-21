@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import snap from '../../assets/images/Snap.svg'
 import { useGetUserQuery } from '../../redux/api/user-slice'
-import HomeIcon from '../../assets/images/HomeIcon.svg'
+import HomeIcon from '../../assets/images/Homeicon.svg'
 import ExploreIcon from '../../assets/images/ExploreIcon.svg'
 import PeopleIcon from '../../assets/images/PeopleIcon.svg'
 import SavedIcon from '../../assets/images/SavedIcon.svg'
