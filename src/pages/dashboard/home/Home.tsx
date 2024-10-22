@@ -3,7 +3,6 @@ import { useGetFeedQuery } from '../../../redux/api/user-slice'
 
 const Home = () => {
   const { data: feed } = useGetFeedQuery(true)
-  console.log(feed)
   return (
     <div className="grid grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-9">
@@ -13,17 +12,17 @@ const Home = () => {
           </div>
           <div>
             <div className="grid grid-cols-1 gap-10 py-[40px] px-[40px]">
-              {feed?.posts.map((post: any) => (
+              {feed?.posts?.map((post: any,index:number) => (
                 <div
-                  key={post._id}
+                  key={index}
                   className="bg-gray-900 w-[700px] mx-auto rounded-xl overflow-hidden shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
                 >
-                  {post.content.map((item: any) => {
+                  {post?.content?.map((item: any) => {
                     if (item.type === 'IMAGE') {
-                      return <img src={item.url} width={500} alt="Post Image" />
+                      return <img src={item.url} width={700} alt="Post Image" />
                     } else if (item.type === 'VIDEO') {
                       return (
-                        <video width={500} controls>
+                        <video width={700} controls>
                           <source src={item.url} type="video/mp4" />
                         </video>
                       )

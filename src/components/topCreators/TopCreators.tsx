@@ -14,6 +14,7 @@ const TopCreators = () => {
   const navigate = useNavigate()
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null)
+  const [usersToShow, setUsersToShow] = useState(8) // Initially show 8 users
 
   const currentusername =
     window.localStorage.getItem('user-data') !== null
@@ -40,16 +41,18 @@ const TopCreators = () => {
     }
   }
 
+  const showMoreUsers = () => {
+    setUsersToShow((prev) => prev + 2) 
+  }
+
   return (
-    <div
-      className={`col-span-3 text-white sticky top-0 h-screen overflow-y-auto`}
-    >
-      <div className="text-[#ffffff]  text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
+    <div className="col-span-3 text-white sticky top-0 h-screen overflow-y-auto">
+      <div className="text-[#ffffff] text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
         <h2>Top Creators</h2>
       </div>
       <div className="flex">
         <div className="grid grid-cols-12">
-          {data?.map((user: any) => (
+          {data.slice(0, usersToShow).map((user: any) => (
             <div className="col-span-6" key={user._id}>
               <div
                 onClick={() => navigate(`/users/${user.username}`)}
@@ -59,7 +62,7 @@ const TopCreators = () => {
                   {user.username}
                 </h2>
                 {userData?.following?.some(
-                  (item: any) => item.username === user.username,
+                  (item: any) => item.username === user.username
                 ) ? (
                   <button
                     className="bg-red-500 rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
@@ -86,6 +89,16 @@ const TopCreators = () => {
           ))}
         </div>
       </div>
+      {usersToShow < data.length && (
+        <div className="flex justify-center mt-4 mb-4">
+          <button
+            className="bg-[#877EFF]  text-white py-[10px] px-[22px] rounded-lg"
+            onClick={showMoreUsers}
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   )
 }

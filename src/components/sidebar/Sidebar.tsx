@@ -49,7 +49,7 @@ const Sidebar = () => {
       <div className="flex flex-col gap-4 px-6">
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -60,7 +60,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -71,7 +71,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -82,7 +82,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -93,7 +93,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -104,7 +104,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -115,7 +115,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] mb-16 transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] mb-16 transition duration-300 ${
               isActive ? 'bg-[#877EFF]' : ''
             }`
           }
@@ -126,14 +126,14 @@ const Sidebar = () => {
         </NavLink>
         <div
           onClick={showModal}
-          className="text-white flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#4b48e5] transition duration-300"
+          className="text-white flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#877EFF] transition duration-300"
         >
           <img src={logOut} alt="logout" className="w-6 h-6" />
           Log Out
         </div>
         <NavLink
           className={({ isActive }) =>
-            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4b48e5] transition duration-300 ${
+            `text-white flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#877EFF] transition duration-300 ${
               isActive ? 'bg-[#877EFF] rounded-xl' : ''
             }`
           }
