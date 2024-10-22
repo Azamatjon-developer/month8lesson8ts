@@ -78,6 +78,12 @@ export const userApi = api.injectEndpoints({
       providesTags: [{ type: 'User' }],
   
   }),
+  getAllPosts: build.query({
+    query: (username) => ({
+      url: `/api/post/${username}`,
+    }),
+    providesTags: [{ type: 'User' }],
+  }),
 
 })
 })

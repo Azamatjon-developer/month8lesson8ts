@@ -5,7 +5,7 @@ const Profile = () => {
     ? JSON.parse(window.localStorage.getItem('userData') as string).username 
     : null;
   const { data } = useGetUserNameQuery(currentUsername);
-
+  console.log(data)
   return (
     <div className="h-screen overflow-y-auto bg-black text-white">
       <div className="max-w-4xl rounded-2xl shadow-lg p-8">
@@ -47,9 +47,9 @@ const Profile = () => {
         </div>
         <h2 className="text-white text-3xl font-semibold mb-6">Posts</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data?.posts?.map((post: any) => (
+          {data?.posts?.map((post: any,index:number) => (
             <div 
-              key={post._id} 
+              key={index} 
               className="bg-gray-900 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
               <div className="p-4">

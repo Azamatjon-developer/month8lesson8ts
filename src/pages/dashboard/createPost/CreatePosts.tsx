@@ -1,49 +1,72 @@
 import { useState } from 'react';
 import image from '../../../assets/images/Image.svg';
-import {
-  useCreatePostMutation,
-  useUploadFilesMutation,
-} from '../../../redux/api/user-slice';
+import { useCreatePostMutation, useUploadFilesMutation } from '../../../redux/api/user-slice';
 
 const CreatePosts = () => {
-  const [uploadFiles, { isLoading }] = useUploadFilesMutation();
-  const [uploadedFiles, setUploadedFiles] = useState<[]>([]);
+  const [uploadFiles, { isLoading: isUploading }] = useUploadFilesMutation();
   const [createPost] = useCreatePostMutation();
   const [imagesOrVideos, setImagesOrVideos] = useState<File[]>([]);
   const [caption, setCaption] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [altText, setAltText] = useState<string>('');
-  
-  const handleUplodFiles = async () => {
-    const formData = new FormData();
-    imagesOrVideos.forEach((file) => formData.append('files', file));
-  
-    const uploadResponse = await uploadFiles(formData).unwrap();
-    const fileUrls = uploadResponse.files.map((file: [{url:string}]) => file[0].url);
-    setUploadedFiles(fileUrls);
+  const [saveImages, setSaveImages] = useState<any>([]);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  }
+  const handleUploadFiles = async () => {
+    const formData = new FormData();
+    imagesOrVideos.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    try {
+      const res = await uploadFiles(formData).unwrap();
+      const urls = res.files.flat().map((item: { url: string }) => item.url);
+      const content = urls.map((url: string) => {
+        const isImage = url.match(/\.(jpeg|jpg|gif|png)$/);
+        const type = isImage ? 'IMAGE' : 'VIDEO';
+        return { url, type };
+      });
+
+      setSaveImages(content);
+    } catch (error) {
+      console.error('Upload failed:', error);
+    }
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    if (!saveImages.length) {
+      alert('Please upload files first.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const data = {
+      content: saveImages,
+      location,
+      content_alt: altText,
+      caption,
+    };
 
     try {
-      const newPost = {
-        caption,
-        location,
-        content_alt: altText,
-        content: uploadedFiles, 
-      };
-
-      await createPost(newPost).unwrap();
-      console.log('Post created successfully');
+      await createPost(data).unwrap();
+      alert('Post created successfully!');
+      setCaption('');
+      setLocation('');
+      setAltText('');
+      setImagesOrVideos([]);
+      setSaveImages([]);
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error('Failed to create post:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="bg-black h-screen overflow-y-auto text-white pt-[67px] pl-[40px] pb-[59]">
+    <div className="bg-black h-screen overflow-y-auto text-white pt-[67px] pl-[40px] pb-[59px]">
       <div className="flex items-center gap-[25px]">
         <img src={image} alt="image" />
         <p className="text-4xl font-bold">Create a Post</p>
@@ -61,36 +84,24 @@ const CreatePosts = () => {
             onChange={(e) => setCaption(e.target.value)}
           ></textarea>
         </label>
+
         <label className="flex flex-col gap-3 relative">
           <span className="font-medium text-lg">Add Photos/Videos</span>
           {imagesOrVideos.length ? (
             <div className="bg-dark-300 w-full overflow-y-auto flex gap-3 p-10">
-              {imagesOrVideos.map((i, inx) => {
-                const mediaUrl = URL.createObjectURL(i);
+              {imagesOrVideos.map((file, index) => {
+                const mediaUrl = URL.createObjectURL(file);
                 return (
-                  <div className="relative" key={inx}>
-                    {i.type.includes('video') ? (
-                      <video
-                        src={mediaUrl}
-                        controls
-                        className="object-contain"
-                      />
+                  <div className="relative" key={index}>
+                    {file.type.includes('video') ? (
+                      <video src={mediaUrl} controls className="object-contain" />
                     ) : (
-                      <img
-                        width={300}
-                        className="object-contain"
-                        src={mediaUrl}
-                        alt={`media-${inx}`}
-                      />
+                      <img width={300} className="object-contain" src={mediaUrl} alt={`media-${index}`} />
                     )}
                     <button
                       type="button"
                       className="absolute bottom-0 left-0 bg-red-500 rounded-2xl pt-2 text-white p-2"
-                      onClick={() =>
-                        setImagesOrVideos(
-                          imagesOrVideos.filter((_, index) => index !== inx)
-                        )
-                      }
+                      onClick={() => setImagesOrVideos(imagesOrVideos.filter((_, i) => i !== index))}
                     >
                       Remove
                     </button>
@@ -101,20 +112,14 @@ const CreatePosts = () => {
                 <button
                   type="button"
                   className="font-semibold py-3 h-fit px-[20px] bg-[#877EFF] w-fit mt-auto ml-auto rounded-lg"
-                  onClick={handleUplodFiles}
+                  onClick={handleUploadFiles}
+                  disabled={isUploading}
                 >
-                  {isLoading ? 'Uploading...' : 'Upload'}
+                  {isUploading ? 'Uploading...' : 'Upload'}
                 </button>
                 <label htmlFor="chooseFile" className="cursor-pointer">
                   <input
-                    onChange={(e) =>
-                      setImagesOrVideos((prev) => [
-                        ...prev,
-                        ...Array.from(e.target.files || []).filter(
-                          (file) => !prev.includes(file)
-                        ),
-                      ])
-                    }
+                    onChange={(e) => setImagesOrVideos([...imagesOrVideos, ...(e.target.files ? Array.from(e.target.files) : [])])}
                     type="file"
                     id="chooseFile"
                     hidden
@@ -130,20 +135,12 @@ const CreatePosts = () => {
           ) : (
             <div className="bg-dark-300 py-[48px] relative">
               <div className="flex flex-col items-center justify-center">
-                <h1 className="text-lg font-semibold mt-3 mb-2">
-                  Drag photos and videos here
-                </h1>
-                <p className="text-xs text-light-400">
-                  SVG, PNG, JPG or GIF (max. 800x400px)
-                </p>
+                <h1 className="text-lg font-semibold mt-3 mb-2">Drag photos and videos here</h1>
+                <p className="text-xs text-light-400">SVG, PNG, JPG or GIF (max. 800x400px)</p>
                 <label htmlFor="chooseFile" className="mt-4 cursor-pointer">
-                  <span className="text-xs font-semibold py-[10px] px-[20px] rounded-lg bg-dark-400">
-                    Select from computer
-                  </span>
+                  <span className="text-xs font-semibold py-[10px] px-[20px] rounded-lg bg-dark-400">Select from computer</span>
                   <input
-                    onChange={(e) =>
-                      setImagesOrVideos(Array.from(e.target.files || []))
-                    }
+                    onChange={(e) => setImagesOrVideos(Array.from(e.target.files || []))}
                     type="file"
                     id="chooseFile"
                     hidden
@@ -155,6 +152,7 @@ const CreatePosts = () => {
             </div>
           )}
         </label>
+
         <label className="flex flex-col gap-3">
           <span className="font-medium text-lg">Add Location</span>
           <div className="bg-black flex items-center p-2 justify-between">
@@ -168,6 +166,7 @@ const CreatePosts = () => {
             />
           </div>
         </label>
+
         <label className="flex flex-col gap-3">
           <span className="font-medium text-lg">Photo/Video Alt Text</span>
           <input
@@ -179,15 +178,17 @@ const CreatePosts = () => {
             onChange={(e) => setAltText(e.target.value)}
           />
         </label>
+
         <button
           type="submit"
           className="font-semibold py-[12px] px-[22px] my-[20px] mx-[20px] bg-[#877EFF] w-fit ml-auto rounded-lg"
+          disabled={isSubmitting}
         >
-          Share Post
+          {isSubmitting ? 'Sharing...' : 'Share Post'}
         </button>
       </form>
     </div>
   );
 };
 
-export default CreatePosts; 
+export default CreatePosts;

@@ -28,9 +28,7 @@ const DashboardRoutes = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users/:username" element={<Users />} />
-
           <Route path="*" element={<NotFound />} />
-
         </Routes>
       </div>
     </main>
