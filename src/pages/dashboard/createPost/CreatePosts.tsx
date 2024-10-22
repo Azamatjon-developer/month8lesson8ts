@@ -190,4 +190,4 @@ const CreatePosts = () => {
   );
 };
 
-export default CreatePosts;
+export default CreatePosts; 

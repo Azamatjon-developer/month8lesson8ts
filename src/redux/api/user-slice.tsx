@@ -72,12 +72,13 @@ export const userApi = api.injectEndpoints({
       })
     }),
     getUserName: build.query({
-      query: () => ({
-        url: '/api/user/profile',
+      query: (username) => ({
+        url: `/api/user/profile/${username}`,
       }),
       providesTags: [{ type: 'User' }],
   
   }),
+
 })
 })
 

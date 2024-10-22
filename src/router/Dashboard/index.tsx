@@ -9,6 +9,8 @@ import CreatePosts from '../../pages/dashboard/createPost/CreatePosts'
 import Settings from '../../pages/dashboard/settings/Settings'
 import Chats from '../../pages/dashboard/chats/Chats'
 import Profile from '../../pages/dashboard/profile/Profile'
+import NotFound from '../../pages/dashboard/notFound/NotFound'
+import Users from '../../pages/dashboard/users/Users'
 
 const DashboardRoutes = () => {
   return (
@@ -25,6 +27,10 @@ const DashboardRoutes = () => {
           <Route path="/createPosts" element={<CreatePosts />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/users/:username" element={<Users />} />
+
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
       </div>
     </main>
