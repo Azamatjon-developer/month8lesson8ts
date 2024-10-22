@@ -22,7 +22,7 @@ const Home = () => {
                       return <img src={item.url} width={700} alt="Post Image" />
                     } else if (item.type === 'VIDEO') {
                       return (
-                        <video width={700} controls>
+                        <video width={800} controls>
                           <source src={item.url} type="video/mp4" />
                         </video>
                       )

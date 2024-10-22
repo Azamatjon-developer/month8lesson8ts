@@ -11,7 +11,7 @@ const Profile = () => {
 
   return (
     <div className="h-screen overflow-y-auto bg-black text-white">
-      <div className="max-w-[1050px] mx-auto rounded-2xl shadow-lg p-8 ">
+      <div className="max-w-[1050px]  rounded-md shadow-lg pt-[60px] pl-[80px] ">
           <div className="flex items-center gap-8 mb-[30px]">
           <div className="relative">
             <img
@@ -23,10 +23,10 @@ const Profile = () => {
           </div>
           <div className="text-left">
             {data?.fullName && (
-              <h3 className="text-4xl font-bold mb-2 text-white">{data.fullName}</h3>
+              <h3 className="text-[36px] font-bold mb-2 text-white">{data.fullName}</h3>
             )}
             {data?.username && (
-              <p className="text-[#58A6FF] text-xl mb-4">
+              <p className="text-[#7878A3] text-[18px] mb-[20px]">
                 <span className="font-medium">Username: @</span>{data.username}
               </p>
             )}
@@ -48,20 +48,20 @@ const Profile = () => {
           </div>
         </div>
 
-        <h2 className="text-white text-3xl font-semibold mb-8">Posts</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <h2 className="text-white text-[30px] font-semibold mb-8">Posts</h2>
+        <div className="grid grid-cols-4 gap-6 w-[1000px]">
           {posts?.map((post: any, index: number) => (
             <div
               key={index}
-              className="bg-gray-700 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
+              className=" rounded-lg  shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
-              <div className="p-4">
+              <div className="p-4 shadow-lg">
                 <img
                   src={post?.content[0]?.url || noImage}
                   alt={post?.content_alt || "Post image"}
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
-                <div className="mt-4">
+                <div className="pt-[12px]">
                   <h3 className="text-xl font-semibold text-white mb-2 truncate">
                     {post?.content_alt || 'Untitled'}
                   </h3>
