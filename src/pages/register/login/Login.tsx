@@ -73,7 +73,7 @@ const Login = () => {
           <p className="text-[16px] text-[#EFEFEF] text-center">
           Don’t have an account?{' '}
             <a
-              href="/register"
+              href="/"
               className="text-[#877EFF] font-semibold"
             >
               Sign up 
