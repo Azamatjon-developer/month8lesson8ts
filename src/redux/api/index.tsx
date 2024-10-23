@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
+import { logout } from '../slice/auth-slice';
+import { useNavigate } from 'react-router-dom';
 
 const baseQuery = async (args: any, api: any, extraOptions: any) => {
+  const { dispatch } = api;
+  const navigate = useNavigate()
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
     prepareHeaders: (headers) => {
@@ -18,6 +22,8 @@ const baseQuery = async (args: any, api: any, extraOptions: any) => {
     const { status } = result.error;
     if (status === 401 || status === 403) {
       console.error('Unauthorized access - Redirecting to login...');
+      dispatch(logout())
+      navigate("/login")
     }
   }
   return result;
