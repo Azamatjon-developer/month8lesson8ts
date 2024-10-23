@@ -46,7 +46,6 @@ const TopCreators = () => {
         <h2>Top Creators</h2>
       </div>
 
-      <div className=" ">
         <div className="flex flex-wrap gap-[20px] ">
           {data.slice(0, usersToShow).map((user: any) => (
             <div className="" key={user._id}>
@@ -85,7 +84,6 @@ const TopCreators = () => {
           ))}
         </div>
       </div>
-    </div>
   )
 }
 

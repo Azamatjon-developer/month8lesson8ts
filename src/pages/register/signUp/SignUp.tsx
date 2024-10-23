@@ -22,7 +22,6 @@ const SignUp = () => {
       email,
       username,
       password,
-      photo: null,
     }
 
     try {

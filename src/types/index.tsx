@@ -14,5 +14,4 @@ export interface User {
   email:string,
   username:string,
   password: string,
-  photo: string | null,
 }
