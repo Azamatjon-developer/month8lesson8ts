@@ -20,7 +20,7 @@ export const userApi = api.injectEndpoints({
     }),
     getAllUsers: build.query({
       query: () => ({
-        url: '/api/user/all?limit=1000',
+        url: '/api/user/all',
         method: 'GET',
       }),
       providesTags: [{ type: 'User' }],

@@ -3,6 +3,7 @@ import { useGetFeedQuery } from '../../../redux/api/user-slice'
 
 const Home = () => {
   const { data: feed } = useGetFeedQuery(true)
+  console.log(feed)
   return (
     <div className="grid grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-9">

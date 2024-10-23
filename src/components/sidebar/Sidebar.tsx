@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import snap from '../../assets/images/Snap.svg'
 import { useGetUserQuery } from '../../redux/api/user-slice'
 import HomeIcon from '../../assets/images/Homeicon.svg'
@@ -16,6 +16,7 @@ import noImage from '../../assets/images/noImage.jpg'
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
   const showModal = () => {
     setIsModalOpen(true)
   }
@@ -32,6 +33,12 @@ const Sidebar = () => {
   const username = userData?.username || ''
   const { data } = useGetUserQuery(username)
   console.log(data)
+
+  let user = localStorage.getItem('x-auth-token')
+  if (!user) {
+  navigate('/login')
+  
+  }
   return (
     <div className="col-span-2 bg-[#1c1c1c] shadow-lg overflow-y-auto h-screen">
       <div className="pt-12 px-6 pb-10">
