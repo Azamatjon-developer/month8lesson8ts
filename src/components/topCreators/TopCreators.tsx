@@ -50,17 +50,22 @@ const TopCreators = () => {
       <div className="text-[#ffffff] text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
         <h2>Top Creators</h2>
       </div>
-      <div className="flex">
-        <div className="grid grid-cols-12">
+
+      <div className=" ">
+        <div className="flex flex-wrap gap-[20px] ">
           {data.slice(0, usersToShow).map((user: any) => (
-            <div className="col-span-6" key={user._id}>
+            <div className="" key={user._id}>
               <div
-                onClick={() => navigate(`/users/${user.username}`)}
+                
                 className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center"
               >
+                <div  onClick={() => navigate(`/users/${user.username}`)}>
                 <h2 className="font-semibold text-[16px] text-white pb-[10px]">
                   {user.username}
                 </h2>
+                <h3 className='font-semibold text-[16px] text-white pb-[10px]' >{user.fullName}</h3>
+
+                </div>
                 {userData?.following?.some(
                   (item: any) => item.username === user.username
                 ) ? (
