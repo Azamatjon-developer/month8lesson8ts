@@ -22,10 +22,10 @@ const Home = () => {
               <div>
                 <div
                   key={follow._id}
-                  className="flex flex-col items-center  rounded-full bg-[#877EFF] w-[70px] h-[70px] p-2"
+                  className="flex flex-col items-center  rounded-full  w-[70px] h-[70px] p-2"
                 >
                   <img
-                    className="w-[50px] h-[50px] rounded-[20px] object-cover"
+                    className="w-[50px] border-[3px] border-[#877EFF] h-[50px] rounded-[20px] object-cover"
                     src={noImage}
                     alt="User"
                   />
@@ -41,7 +41,6 @@ const Home = () => {
 
           <div className="py-[54px] px-[53px]">
             <h2 className="font-bold text-white text-[30px]">Home Feed</h2>
-            <h3>How</h3>
           </div>
           <div>
             <div className="grid grid-cols-1 gap-10 py-[40px] px-[40px]">

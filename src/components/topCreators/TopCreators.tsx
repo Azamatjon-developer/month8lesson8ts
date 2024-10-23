@@ -66,7 +66,7 @@ const TopCreators = () => {
                     disabled={loadingUserId === user.username}
                   >
                     {loadingUserId === user.username
-                      ? 'Unfollowing...'
+                      ? 'Loading...'
                       : 'Unfollow'}
                   </button>
                 ) : (
@@ -76,7 +76,7 @@ const TopCreators = () => {
                     disabled={loadingUserId === user.username}
                   >
                     {loadingUserId === user.username
-                      ? 'Following...'
+                      ? 'Loading'
                       : 'Follow'}
                   </button>
                 )}
