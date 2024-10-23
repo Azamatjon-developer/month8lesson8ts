@@ -1,19 +1,50 @@
 import TopCreators from '../../../components/topCreators/TopCreators'
-import { useGetFeedQuery } from '../../../redux/api/user-slice'
-
+import {
+  useGetFeedQuery,
+  useGetUserByUsernameQuery,
+} from '../../../redux/api/user-slice'
+import noImage from '../../../assets/images/noImage.jpg'
 const Home = () => {
   const { data: feed } = useGetFeedQuery(true)
-  console.log(feed)
+  const currentusername =
+    window.localStorage.getItem('user-data') !== null
+      ? JSON.parse(window.localStorage.getItem('user-data') as string).username
+      : null
+
+  const { data: userData } = useGetUserByUsernameQuery(currentusername)
+  console.log(userData)
   return (
     <div className="grid grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-9">
-        <div>
+        <div className="">
+          <div className="flex flex-wrap items-center pl-[53px] gap-5 pt-[60px]">
+            {userData?.following?.map((follow: any) => (
+              <div>
+                <div
+                  key={follow._id}
+                  className="flex flex-col items-center  rounded-full bg-[#877EFF] w-[70px] h-[70px] p-2"
+                >
+                  <img
+                    className="w-[50px] h-[50px] rounded-[20px] object-cover"
+                    src={noImage}
+                    alt="User"
+                  />
+                </div>
+                  <div className="">
+                    <h3 className="text-white text-sm font-semibold pt-1 text-center">
+                      {follow.username}
+                    </h3>
+                  </div>
+              </div>
+            ))}
+          </div>
+
           <div className="py-[54px] px-[53px]">
             <h2 className="font-bold text-white text-[30px]">Home Feed</h2>
           </div>
           <div>
             <div className="grid grid-cols-1 gap-10 py-[40px] px-[40px]">
-              {feed?.posts?.map((post: any,index:number) => (
+              {feed?.posts?.map((post: any, index: number) => (
                 <div
                   key={index}
                   className="bg-gray-900 w-[700px] mx-auto rounded-xl overflow-hidden shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
@@ -28,7 +59,7 @@ const Home = () => {
                         </video>
                       )
                     }
-                    return null;
+                    return null
                   })}
                   <div className="p-4">
                     <h2 className="text-white text-[20px] font-bold pb-[10px]">

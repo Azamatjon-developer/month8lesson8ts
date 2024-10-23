@@ -37,7 +37,6 @@ const Sidebar = () => {
   let user = localStorage.getItem('x-auth-token')
   if (!user) {
   navigate('/login')
-  
   }
   return (
     <div className="col-span-2 bg-[#1c1c1c] shadow-lg overflow-y-auto h-screen">

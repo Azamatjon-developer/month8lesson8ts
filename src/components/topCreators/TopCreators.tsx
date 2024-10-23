@@ -14,7 +14,7 @@ const TopCreators = () => {
   const navigate = useNavigate()
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null)
-  const [usersToShow, setUsersToShow] = useState(8) // Initially show 8 users
+  const [usersToShow] = useState(8)
 
   const currentusername =
     window.localStorage.getItem('user-data') !== null
@@ -22,7 +22,6 @@ const TopCreators = () => {
       : null
 
   const { data: userData } = useGetUserByUsernameQuery(currentusername)
-
   const handleFollowUser = async (username: string): Promise<void> => {
     setLoadingUserId(username)
     try {
@@ -41,10 +40,6 @@ const TopCreators = () => {
     }
   }
 
-  const showMoreUsers = () => {
-    setUsersToShow((prev) => prev + 2) 
-  }
-
   return (
     <div className="col-span-3 text-white sticky top-0 h-screen overflow-y-auto">
       <div className="text-[#ffffff] text-[24px] pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
@@ -55,19 +50,15 @@ const TopCreators = () => {
         <div className="flex flex-wrap gap-[20px] ">
           {data.slice(0, usersToShow).map((user: any) => (
             <div className="" key={user._id}>
-              <div
-                
-                className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center"
-              >
-                <div  onClick={() => navigate(`/users/${user.username}`)}>
-                <h2 className="font-semibold text-[16px] text-white pb-[10px]">
-                  {user.username}
-                </h2>
-                <h3 className='font-semibold text-[16px] text-white pb-[10px]' >{user.fullName}</h3>
-
+              <div className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center">
+                <div onClick={() => navigate(`/users/${user.username}`)}>
+                  <h2 className="font-semibold line-clamp-1 text-[16px] text-white pb-[10px]">
+                    {user.username} 
+                    <h3 className='line-clamp-1'>{user.fullName}</h3>
+                  </h2>
                 </div>
                 {userData?.following?.some(
-                  (item: any) => item.username === user.username
+                  (item: any) => item.username === user.username,
                 ) ? (
                   <button
                     className="bg-red-500 rounded-md pt-[8px] pb-[8px] pl-[18px] pr-[18px] font-semibold"
@@ -94,16 +85,6 @@ const TopCreators = () => {
           ))}
         </div>
       </div>
-      {usersToShow < data.length && (
-        <div className="flex justify-center mt-4 mb-4">
-          <button
-            className="bg-[#877EFF]  text-white py-[10px] px-[22px] rounded-lg"
-            onClick={showMoreUsers}
-          >
-            Show More
-          </button>
-        </div>
-      )}
     </div>
   )
 }
