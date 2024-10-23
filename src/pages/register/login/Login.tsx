@@ -1,4 +1,3 @@
-import SignUpImage from '../../../assets/images/SignUpLeft.png'
 import Google from '../../../assets/images/Google.png'
 import Snapgram from "../../../assets/images/Snap.svg"
 import { useLoginMutation } from '../../../redux/api/user-slice'
@@ -7,6 +6,7 @@ import { setToken, setUser } from '../../../redux/slice/auth-slice'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { Context } from '../../../context/Context'
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const [loginUser] = useLoginMutation();
@@ -14,9 +14,24 @@ const Login = () => {
   const navigate = useNavigate();
   const context = useContext(Context)
 
+//   try {
+//     const res = await loginUser(data).unwrap()
+//     toast.success(`User ${res.full_name} created successfully!`, {
+//       position: 'top-right',
+//     })
+//     navigate('/login')
+//   } catch (err) {
+//     const errorMessage = (err as any)?.data?.message || 'Registration failed.'
+//     toast.error(`Error: ${errorMessage}`, {
+//       position: 'top-right',
+//     })
+//   }
+// }
+
+  
   return  (
     <div className="flex items-center bg-black">
-      <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[40%]">
+      <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[50%]">
           <div className='flex items-center justify-center mb-[68px] gap-5'>
             <img src={Snapgram} alt="Snapgram" />
             <h2 className='text-[#FFFFFF] font-bold text-[30px]'>Snapgram</h2>
@@ -27,7 +42,7 @@ const Login = () => {
             <p className='text-[#7878A3]'>Welcome back! Please enter your details.</p>
           </div>
       
-        <form className="space-y-6" onSubmit={(e) => {
+        <form className="w-[400px] flex flex-col gap-[20px] mx-auto" onSubmit={(e) => {
           e.preventDefault()
           const formData = new FormData(e.currentTarget)
           const formDataToJson = Object.fromEntries(formData)
@@ -45,7 +60,7 @@ const Login = () => {
             <label className="block text-[#EFEFEF] font-medium"> Username</label>
             <input
               type="text"
-              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-md outline-none bg-[#1F1F22] text-white"
               placeholder="Enter your username"
               name='username'
             />
@@ -55,7 +70,7 @@ const Login = () => {
             <label className="block text-[#EFEFEF] font-medium"> Password</label>
             <input
               type="password"
-              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none"
+              className="mt-1 w-[400px] h-[48px] p-3 rounded-md outline-none bg-[#1F1F22]  text-white"
               placeholder="Enter your password"
               name="password"
             />
@@ -81,12 +96,8 @@ const Login = () => {
           </p>
         </form>
       </div>
-      <div className="w-[60%]">
-        <img
-          className="w-full h-[100vh]"
-          src={SignUpImage}
-          alt="signUp image"
-        />
+      <div className="w-[50%] bg-image">
+       
       </div>
     </div>
   )
