@@ -27,7 +27,7 @@ const Login = () => {
       context?.setToken(res.accessToken);
       window.localStorage.setItem('userData', JSON.stringify(formDataToJson));
 
-      toast.success(`Welcome my instagram , ${res.user.full_name}!`, {
+      toast.success(`Welcome my instagram , ${res.user.fullName}!`, {
         position: 'top-right',
       });
 
@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center bg-black">
-      <div className=" pt-[216px] pl-[177px] pb-[216px] pr-[143px] w-[50%]">
+      <div className=" pt-[216px] pl-[177px] pr-[143px] w-[50%]">
         <div className="flex items-center justify-center mb-[68px] gap-5">
           <img src={Snapgram} alt="Snapgram" />
           <h2 className="text-[#FFFFFF] font-bold text-[30px]">Snapgram</h2>
@@ -94,7 +94,7 @@ const Login = () => {
 
           <p className="text-[16px] text-[#EFEFEF] text-center">
             Don’t have an account?{' '}
-            <a href="/signup" className="text-[#877EFF] font-semibold">
+            <a href="/" className="text-[#877EFF] font-semibold">
               Sign up
             </a>
           </p>

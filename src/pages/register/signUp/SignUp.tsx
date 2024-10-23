@@ -41,7 +41,7 @@ const SignUp = () => {
 
   return (
     <div className=" flex justify-center bg-black  ">
-      <div className=" w-[50%] pt-[218px] pl-[177px] pb-[216px] pr-[143px]">
+      <div className=" w-[50%] pt-[218px] pl-[177px] pr-[143px]">
         <div>
           <h2 className="text-[30px] font-bold pt-[12px] pb-[32px] text-white text-center">
             Create a new account

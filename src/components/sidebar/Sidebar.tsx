@@ -12,6 +12,7 @@ import logOut from '../../assets/images/LogOutIcon.svg'
 import settings from '../../assets/images/SettingsIcon.svg'
 import { useState } from 'react'
 import { Modal } from 'antd'
+import noImage from '../../assets/images/noImage.jpg'
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -30,7 +31,7 @@ const Sidebar = () => {
   const userData = JSON.parse(localStorage.getItem('userData') || '{}')
   const username = userData?.username || ''
   const { data } = useGetUserQuery(username)
-
+  console.log(data)
   return (
     <div className="col-span-2 bg-[#1c1c1c] shadow-lg overflow-y-auto h-screen">
       <div className="pt-12 px-6 pb-10">
@@ -38,13 +39,21 @@ const Sidebar = () => {
           <img src={snap} alt="snap" className="w-8 h-8" />
           <h2 className="text-white text-2xl font-bold">Sidebar</h2>
         </div>
-        <Link to="/profile" >
-        <div className="text-center">
-          <h3 className="text-white font-semibold text-lg">{data?.fullName}</h3>
-          <p className="text-slate-400 font-medium text-sm">{data?.username}</p>
-        </div>
+        <Link to="/profile">
+          <div className="flex items-center gap-[18px]">
+            <div>
+              <img src={noImage} className='w-[56px] h-[56px] rounded-full' alt="noImage" />
+            </div>
+            <div>
+              <h3 className="text-white font-semibold text-lg">
+                {data?.fullName}
+              </h3>
+              <p className="text-slate-400 font-medium text-sm">
+                {data?.username}
+              </p>
+            </div>
+          </div>
         </Link>
-      
       </div>
       <div className="flex flex-col gap-4 px-6">
         <NavLink
