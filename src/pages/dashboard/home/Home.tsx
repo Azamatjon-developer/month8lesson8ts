@@ -41,6 +41,7 @@ const Home = () => {
 
           <div className="py-[54px] px-[53px]">
             <h2 className="font-bold text-white text-[30px]">Home Feed</h2>
+            <h3>How</h3>
           </div>
           <div>
             <div className="grid grid-cols-1 gap-10 py-[40px] px-[40px]">
