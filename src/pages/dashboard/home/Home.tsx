@@ -1,16 +1,18 @@
-import TopCreators from '../../../components/topCreators/TopCreators'
+import {TopCreators} from '../../../components/topCreators/TopCreators'
 import {
   useGetFeedQuery,
   useGetUserByUsernameQuery,
 } from '../../../redux/api/user-slice'
 import noImage from '../../../assets/images/noImage.jpg'
+import { useNavigate } from 'react-router-dom'
+
 const Home = () => {
   const { data: feed } = useGetFeedQuery(true)
   const currentusername =
     window.localStorage.getItem('user-data') !== null
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
       : null
-
+  const navigate = useNavigate()
   const { data: userData } = useGetUserByUsernameQuery(currentusername)
   console.log(userData)
   return (
@@ -19,22 +21,19 @@ const Home = () => {
         <div className="">
           <div className="flex flex-wrap items-center pl-[53px] gap-5 pt-[60px]">
             {userData?.following?.map((follow: any) => (
-              <div>
-                <div
-                  key={follow._id}
-                  className="flex flex-col items-center  rounded-full  w-[70px] h-[70px] p-2"
-                >
+              <div key={follow._id}>
+                <div className="flex flex-col items-center  rounded-full  w-[70px] h-[70px] p-2">
                   <img
                     className="w-[50px] border-[3px] border-[#877EFF] h-[50px] rounded-[20px] object-cover"
                     src={noImage}
                     alt="User"
                   />
                 </div>
-                  <div className="">
-                    <h3 className="text-white text-sm font-semibold pt-1 text-center">
-                      {follow.username}
-                    </h3>
-                  </div>
+                <div className="">
+                  <h3 className="text-white text-sm font-semibold pt-1 text-center">
+                    {follow.username}
+                  </h3>
+                </div>
               </div>
             ))}
           </div>
@@ -61,7 +60,7 @@ const Home = () => {
                     }
                     return null
                   })}
-                  <div className="p-4">
+                  <div onClick={()=> navigate("/postProfile")} className="p-4 cursor-pointer">
                     <h2 className="text-white text-[20px] font-bold pb-[10px]">
                       {post.caption}
                     </h2>

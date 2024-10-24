@@ -7,6 +7,7 @@ import Settings from '../../pages/dashboard/settings/Settings'
 import Profile from '../../pages/dashboard/profile/Profile'
 import NotFound from '../../pages/dashboard/notFound/NotFound'
 import Users from '../../pages/dashboard/users/Users'
+import PostProfile from '../../pages/dashboard/postProfile/PostProfile'
 
 const DashboardRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const DashboardRoutes = () => {
           <Route path="/createPosts" element={<CreatePosts />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/postProfile" element={<PostProfile />} />
           <Route path="/users/:username" element={<Users />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

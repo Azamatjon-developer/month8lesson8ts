@@ -48,7 +48,7 @@ const Sidebar = () => {
         <Link to="/profile">
           <div className="flex items-center gap-[18px]">
             <div>
-              <img src={noImage} className='w-[56px] h-[56px] rounded-full' alt="noImage" />
+              <img src={noImage} className='w-[56px] h-[56px] border-[3px] border-[#877EFF] rounded-full' alt="noImage" />
             </div>
             <div>
               <h3 className="text-white font-semibold text-lg">
