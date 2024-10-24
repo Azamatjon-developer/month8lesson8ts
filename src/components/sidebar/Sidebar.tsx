@@ -55,7 +55,7 @@ const Sidebar = () => {
                 {data?.fullName}
               </h3>
               <p className="text-slate-400 font-medium text-sm">
-                {data?.username}
+               @{data?.username}
               </p>
             </div>
           </div>

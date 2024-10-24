@@ -30,7 +30,6 @@ const TopCreators = () => {
       setLoadingUserId(null)
     }
   }
-
   const handleUnfollowUser = async (username: string): Promise<void> => {
     setLoadingUserId(username)
     try {

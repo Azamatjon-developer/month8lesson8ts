@@ -59,7 +59,7 @@ const People = () => {
                 Name: {user.fullName}
               </h2>
               <h3 className="text-lg text-gray-400 mb-4">
-                Username and : {user.username}
+                Username: {user.username}
               </h3>
             </div>
             <div className='mx-auto rounded-md '>
