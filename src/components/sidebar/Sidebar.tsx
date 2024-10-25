@@ -32,7 +32,6 @@ const Sidebar = () => {
   const userData = JSON.parse(localStorage.getItem('userData') || '{}')
   const username = userData?.username || ''
   const { data } = useGetUserQuery(username)
-  console.log(data)
 
   let user = localStorage.getItem('x-auth-token')
   if (!user) {

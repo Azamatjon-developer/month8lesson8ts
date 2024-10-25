@@ -92,9 +92,10 @@ export const userApi = api.injectEndpoints({
       
     }),
     postComments : build.mutation({
-      query: (username) => ({ 
-        url: `/api/comment${username}`,
+      query: ({id,message}) => ({ 
+        url: `/api/comment/${id}`,
         method: 'POST',
+        body: { message }
       }),
       invalidatesTags: [{ type: 'User' }],
     })
