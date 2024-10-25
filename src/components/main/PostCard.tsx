@@ -62,7 +62,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
     <div className="bg-gray-900 w-[700px] mx-auto rounded-xl overflow-hidden shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
       <div
-        onClick={() => navigate("/postProfile")}
+        onClick={() => navigate(`/postProfile/${post._id}`)}
         className="p-4 cursor-pointer"
       >
         <h2 className="text-white text-[20px] font-bold pb-[10px]">

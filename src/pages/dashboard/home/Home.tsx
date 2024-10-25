@@ -13,7 +13,7 @@ const Home = () => {
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
       : null
   const { data: userData } = useGetUserByUsernameQuery(currentusername)
-
+  
   return (
     <div className="grid grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-9">
