@@ -1,15 +1,15 @@
-import React, { MouseEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   usePostLikesMutation,
   usePostCommentsMutation,
-} from '../../redux/api/user-slice';
-import like from '../../assets/images/LikeIcon.svg';
-import comment from '../../assets/images/CommentIcon.svg';
-import share from '../../assets/images/ShareIcon.svg';
-import send from '../../assets/images/SendIcon.svg';
-import noImage from '../../assets/images/noImage.jpg';
-import heart from '../../assets/images/hear.svg';
+} from "../../redux/api/user-slice";
+import like from "../../assets/images/LikeIcon.svg";
+import comment from "../../assets/images/CommentIcon.svg";
+import share from "../../assets/images/ShareIcon.svg";
+import send from "../../assets/images/SendIcon.svg";
+import noImage from "../../assets/images/noImage.jpg";
+import heart from "../../assets/images/hear.svg";
 
 interface Post {
   _id: string;
@@ -17,7 +17,7 @@ interface Post {
   location: string;
   isLiked: boolean;
   likes: string[];
-  content: { type: 'IMAGE' | 'VIDEO'; url: string }[];
+  content: { type: "IMAGE" | "VIDEO"; url: string }[];
 }
 
 interface PostCardProps {
@@ -26,11 +26,11 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const navigate = useNavigate();
-  const [commentText, setCommentText] = useState<string>('');
   const [likePost] = usePostLikesMutation();
   const [postComment] = usePostCommentsMutation();
   const [isLiked, setIsLiked] = useState<boolean>(post.isLiked);
   const [likeCount, setLikeCount] = useState<number>(post.likes.length);
+  const [commentText, setCommentText] = useState<string>("");
 
   const handleLikePost = (postId: string) => {
     likePost(postId)
@@ -40,37 +40,29 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         setIsLiked(!isLiked);
       })
       .catch((error) => {
-        console.error('Error liking post:', error);
+        console.error("Error liking post:", error);
       });
   };
 
-  const handlePostComment = (e: MouseEvent) => {
-    e.preventDefault(); // Prevent default form submission
-
-    if (!commentText.trim()) {
-      console.error('Comment cannot be empty!');
-      return;
+  const handlePostComment = (e:any) => {
+    e.preventDefault();
+    if (commentText.trim()) {
+      postComment({ id: post._id, message: commentText })
+        .unwrap()
+        .then(() => {
+          setCommentText(""); // Clear the input field
+          console.log("Comment posted successfully");
+        })
+        .catch((error) => {
+          console.error("Error posting comment:", error);
+        });
     }
-
-    const user = {
-      message: commentText,
-    };
-
-    postComment({ id: post._id, user })
-      .unwrap()
-      .then((res) => {
-        setCommentText(''); // Clear the input field after posting
-        console.log('Comment posted successfully:', res);
-      })
-      .catch((error) => {
-        console.error('Error posting comment:', error);
-      });
   };
 
   return (
     <div className="bg-gray-900 w-[700px] mx-auto rounded-xl overflow-hidden shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
       <div
-        onClick={() => navigate('/postProfile')}
+        onClick={() => navigate("/postProfile")}
         className="p-4 cursor-pointer"
       >
         <h2 className="text-white text-[20px] font-bold pb-[10px]">
@@ -80,11 +72,11 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       </div>
 
       {post?.content?.map((item) => {
-        if (item.type === 'IMAGE') {
+        if (item.type === "IMAGE") {
           return (
             <img src={item.url} width={700} alt="Post Image" key={item.url} />
           );
-        } else if (item.type === 'VIDEO') {
+        } else if (item.type === "VIDEO") {
           return (
             <video width={800} controls key={item.url}>
               <source src={item.url} type="video/mp4" />
@@ -119,15 +111,15 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         />
         <div className="flex items-center justify-between gap-5 relative">
           <input
-            value={commentText}
             name="comment"
-            onChange={(e) => setCommentText(e.target.value)}
             className="w-[530px] pt-[12px] pb-[12px] p-3 outline-none bg-[#101012] text-[#5C5C7B] rounded-md"
             type="text"
             placeholder="Write your comment"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
           />
           <img
-            onClick={handlePostComment} // Corrected: Removed e._id as it's not needed
+            onClick={ handlePostComment} 
             className="absolute left-[455px] cursor-pointer"
             src={send}
             alt="send"
@@ -138,4 +130,4 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default PostCard;  

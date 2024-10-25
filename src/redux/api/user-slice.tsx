@@ -98,6 +98,16 @@ export const userApi = api.injectEndpoints({
         body: { message }
       }),
       invalidatesTags: [{ type: 'User' }],
+    }),
+    getCommentPostID: build.query({
+      query: (id) => ({
+        url: `api/comment/post/${id}`
+      })
+    }),
+    getPostByUserAndID: build.query({
+      query:({username, id}) => ({
+        api: `/api/post/${username}/${id}`
+      })
     })
   }),
 })
@@ -116,5 +126,7 @@ export const {
   useGetUserNameQuery,
   useGetAllPostsQuery,
   usePostLikesMutation,
-  usePostCommentsMutation
+  usePostCommentsMutation,
+  useGetCommentPostIDQuery,
+  useGetPostByUserAndIDQuery,
 } = userApi
