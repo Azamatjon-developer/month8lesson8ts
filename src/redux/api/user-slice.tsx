@@ -68,24 +68,31 @@ export const userApi = api.injectEndpoints({
     }),
     getFeed: build.query({
       query: () => ({
-        url: '/api/user/feed?limit=3000'
-      })
+        url: '/api/user/feed?limit=3000',
+      }),
     }),
     getUserName: build.query({
       query: (username) => ({
         url: `/api/user/profile/${username}`,
       }),
       providesTags: [{ type: 'User' }],
-  
-  }),
-  getAllPosts: build.query({
-    query: (username) => ({
-      url: `/api/post/${username}`,
     }),
-    providesTags: [{ type: 'User' }],
+    getAllPosts: build.query({
+      query: (username) => ({
+        url: `/api/post/${username}`,
+      }),
+      providesTags: [{ type: 'User' }],
+    }),
+    postLikes: build.mutation({
+      query: (username) => ({
+        url: `/api/post/${username}/like`,
+        method: 'POST',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+      
+    }),
+ 
   }),
-
-})
 })
 
 export const {
@@ -100,6 +107,6 @@ export const {
   useUploadFilesMutation,
   useGetFeedQuery,
   useGetUserNameQuery,
-  useGetAllPostsQuery
-  
+  useGetAllPostsQuery,
+  usePostLikesMutation,
 } = userApi

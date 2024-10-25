@@ -42,19 +42,22 @@ const TopCreators = () => {
   return (
     <div className="col-span-3 text-white sticky top-0 h-screen overflow-y-auto">
       <div className=" pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
-        <h2 className='text-[#ffffff] text-[24px] font-bold leading-4'>Top Creators</h2>
+        <h2 className="text-[#ffffff] text-[24px] font-bold leading-4">
+          Top Creators
+        </h2>
       </div>
 
-        <div className="flex flex-wrap gap-[20px] ">
-          {data.slice(0, usersToShow).map((user: any) => (
-            <div className="" key={user._id}>
-              <div className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center">
-                <div onClick={() => navigate(`/users/${user.username}`)}>
-                  <h2 className="font-semibold line-clamp-1 text-[16px] text-white pb-[10px]">
-                    {user.username} 
-                    <h3 className='line-clamp-1'>{user.fullName}</h3>
-                  </h2>
-                </div>
+      <div className="flex flex-wrap gap-[20px] ">
+        {data.slice(0, usersToShow).map((user: any) => (
+          <div className="" key={user._id}>
+            <div className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center">
+              <div onClick={() => navigate(`/users/${user.username}`)}>
+                <h2 className="font-semibold line-clamp-1 text-[16px] text-white pb-[10px]">
+                  {user.username}
+                </h2>
+                <h3 className="line-clamp-1">{user.fullName}</h3>
+              </div>
+              <div className="flex flex-col items-center justify-between ">
                 {userData?.following?.some(
                   (item: any) => item.username === user.username,
                 ) ? (
@@ -73,17 +76,16 @@ const TopCreators = () => {
                     onClick={() => handleFollowUser(user.username)}
                     disabled={loadingUserId === user.username}
                   >
-                    {loadingUserId === user.username
-                      ? 'Loading'
-                      : 'Follow'}
+                    {loadingUserId === user.username ? 'Loading' : 'Follow'}
                   </button>
                 )}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+    </div>
   )
 }
 
-export  {TopCreators}
+export { TopCreators }
