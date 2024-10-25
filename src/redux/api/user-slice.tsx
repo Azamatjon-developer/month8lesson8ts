@@ -91,7 +91,13 @@ export const userApi = api.injectEndpoints({
       invalidatesTags: [{ type: 'User' }],
       
     }),
- 
+    postComments : build.mutation({
+      query: (username) => ({ 
+        url: `/api/comment${username}`,
+        method: 'POST',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    })
   }),
 })
 
@@ -109,4 +115,5 @@ export const {
   useGetUserNameQuery,
   useGetAllPostsQuery,
   usePostLikesMutation,
+  usePostCommentsMutation
 } = userApi

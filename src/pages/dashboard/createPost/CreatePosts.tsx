@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import image from '../../../assets/images/Image.svg';
 import { useCreatePostMutation, useUploadFilesMutation } from '../../../redux/api/user-slice';
+import toast from 'react-hot-toast';
 
 const CreatePosts = () => {
   const [uploadFiles, { isLoading: isUploading }] = useUploadFilesMutation();
@@ -38,7 +39,7 @@ const CreatePosts = () => {
     setIsSubmitting(true);
 
     if (!saveImages.length) {
-      alert('Please upload files first.');
+      toast.error('Please upload files first.');
       setIsSubmitting(false);
       return;
     }
@@ -52,7 +53,7 @@ const CreatePosts = () => {
 
     try {
       await createPost(data).unwrap();
-      alert('Post created successfully!');
+      toast.success('Post created successfully!');
       setCaption('');
       setLocation('');
       setAltText('');

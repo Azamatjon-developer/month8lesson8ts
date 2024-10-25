@@ -6,29 +6,46 @@ import noImage from '../../assets/images/noImage.jpg';
 import { useNavigate } from 'react-router-dom';
 import heart from "../../assets/images/hear.svg"
 import { useState } from 'react';
-import { usePostLikesMutation } from '../../redux/api/user-slice';
+import { usePostLikesMutation, usePostCommentsMutation } from '../../redux/api/user-slice';
 
 const PostCard = ({ post }: any) => {
   const navigate = useNavigate();
   const [commentText, setCommentText] = useState('');
   const [likePost] = usePostLikesMutation();
-  const [isLiked, setIsLiked] = useState(post.isLiked); 
+  const [postComment] = usePostCommentsMutation(); // Mutation for posting comments
+  const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likeCount, setLikeCount] = useState(post.likes.length);
 
   const handleLikePost = (postId: string) => {
     likePost(postId)
       .unwrap()
       .then(() => {
-        if (isLiked) {
-          setLikeCount(likeCount - 1); 
-        } else {
-          setLikeCount(likeCount + 1); 
-        }
+        setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
         setIsLiked(!isLiked);
       })
       .catch((error) => {
         console.error('Error liking post:', error);
       });
+  };
+
+  const handleCommentSubmit = () => {
+    if (commentText.trim()) {
+      postComment({ postId: post._id, text: commentText.trim() }) // API call
+        .unwrap()
+        .then(() => {
+          setCommentText(''); // Clear the input after submitting
+        })
+        .catch((error) => {
+          console.error('Error submitting comment:', error);
+        });
+    }
+  };
+
+  // Function to handle the Enter key press for submitting the comment
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleCommentSubmit();
+    }
   };
 
   return (
@@ -76,11 +93,17 @@ const PostCard = ({ post }: any) => {
             value={commentText}
             name="comment"
             onChange={(e) => setCommentText(e.target.value)}
+            onKeyPress={handleKeyPress} // Handle Enter key for submission
             className="w-[530px] pt-[12px] pb-[12px] p-3 outline-none bg-[#101012] text-[#5C5C7B] rounded-md"
             type="text"
             placeholder="Write your comment"
           />
-          <img className="absolute left-[455px] cursor-pointer" src={send} alt="send" />
+          <button 
+            onClick={handleCommentSubmit} 
+            className="absolute left-[455px] cursor-pointer"
+          >
+            <img src={send} alt="send" />
+          </button>
         </div>
       </div>
     </div>
