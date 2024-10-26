@@ -44,7 +44,7 @@ const TopCreators = () => {
 
   if (usersLoading || userLoading) {
     return (
-      <div className="flex justify-between items-center h-screen bg-black">
+      <div className="flex justify-between items-center h-screen">
         <ClipLoader color="#877EFF" size={70} /> 
       </div>
     )

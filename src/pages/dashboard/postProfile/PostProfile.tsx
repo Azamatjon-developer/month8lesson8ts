@@ -1,23 +1,29 @@
 import { useParams } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 import {
   useGetCommentPostIDQuery,
   useGetPostByUserAndIDQuery,
-  
 } from '../../../redux/api/user-slice'
 
 const PostProfile = () => {
   const { id, username } = useParams()
+  
   const {
     data: allComment,
     isLoading: isCommentsLoading,
   } = useGetCommentPostIDQuery(id)
+  
   const {
     data: postData,
     isLoading: isPostLoading,
   } = useGetPostByUserAndIDQuery({ username, id })
-  console.log(allComment)
+
   if (isPostLoading || isCommentsLoading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex items-center justify-center h-screen bg-black">
+        <ClipLoader color="#36d7b7" size={60} />
+      </div>
+    )
   }
 
   return (
