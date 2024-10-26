@@ -22,7 +22,7 @@ const Home = () => {
     return (
       <div className="flex flex-col items-center h-screen bg-black">
         <ClipLoader color="#877EFF" size={100} />
-        <h3 className="text-white text-xl pl-3">Loading Home page ...</h3>
+        <h3 className="text-white text-xl pl-3">  Loading Home page ...</h3>
         <div className="flex flex-col items-center mt-10">
           <div className="flex flex-wrap items-center gap-5 pt-16">
             {Array.from({ length: 5 }).map((_, index) => (

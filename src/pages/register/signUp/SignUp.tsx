@@ -1,94 +1,86 @@
-import Google from '../../../assets/images/Google.png'
-import { FormEvent } from 'react'
-import { User } from '../../../types'
-import { useRegisterMutation } from '../../../redux/api/user-slice'
-import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import Google from '../../../assets/images/Google.png';
+import { FormEvent } from 'react';
+import { User } from '../../../types';
+import { useRegisterMutation } from '../../../redux/api/user-slice';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
-  const navigate = useNavigate()
-  const [createUser, { isLoading }] = useRegisterMutation()
+  const navigate = useNavigate();
+  const [createUser, { isLoading }] = useRegisterMutation();
 
   async function handleFormSubmit(e: FormEvent) {
-    e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
-    const full_name = formData.get('name') as string
-    const email = formData.get('email') as string
-    const username = formData.get('username') as string
-    const password = formData.get('password') as string
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const full_name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const username = formData.get('username') as string;
+    const password = formData.get('password') as string;
 
     const data: User = {
       full_name,
       email,
       username,
       password,
-    }
+    };
 
     try {
-      const res = await createUser(data).unwrap()
+      const res = await createUser(data).unwrap();
       toast.success(`User ${res.full_name} created successfully!`, {
         position: 'top-right',
-      })
-      navigate('/login')
+      });
+      navigate('/login');
     } catch (err) {
-      const errorMessage = (err as any)?.data?.message || 'Registration failed.'
+      const errorMessage = (err as any)?.data?.message || 'Registration failed.';
       toast.error(`Error: ${errorMessage}`, {
         position: 'top-right',
-      })
+      });
     }
   }
 
   return (
-    <div className="flex flex-col md:flex-row justify-center bg-black min-h-screen">
-      <div className="w-full md:w-1/2 pt-20 px-4 md:px-20 lg:px-32">
-        <div>
-          <h2 className="text-2xl font-bold text-white text-center mb-6">Create a new account</h2>
-          <p className="text-[#7878A3] text-center mb-8 text-lg">
-            To use Snapgram, please enter your details.
-          </p>
-        </div>
-        <form
-          onSubmit={handleFormSubmit}
-          className="w-full max-w-md mx-auto flex flex-col gap-5"
-        >
+    <div className="flex flex-col md:flex-row justify-center min-h-screen">
+      <div className="w-full md:w-1/2 pt-40 px-4 md:px-20 lg:px-32 bg-black">
+        <h2 className="text-2xl font-bold text-white text-center mb-6">Create a new account</h2>
+        <p className="text-[#7878A3] text-center mb-8 text-lg">
+          To use Snapgram, please enter your details.
+        </p>
+        <form onSubmit={handleFormSubmit} className="w-full max-w-md mx-auto flex flex-col gap-5">
           <div>
             <label className="block text-[#EFEFEF] font-medium">Name</label>
             <input
               type="text"
-              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-black text-white"
               placeholder="Enter your name"
               name="name"
               required
             />
           </div>
-
           <div>
             <label className="block text-[#EFEFEF] font-medium">Email</label>
             <input
               type="email"
-              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-black text-white"
               placeholder="Enter your email"
               name="email"
               required
             />
           </div>
-
           <div>
             <label className="block text-[#EFEFEF] font-medium">Username</label>
             <input
               type="text"
-              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-black text-white"
               placeholder="Enter your username"
               name="username"
               required
             />
           </div>
-
           <div>
             <label className="block text-[#EFEFEF] font-medium">Password</label>
             <input
               type="password"
-              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white mb-5"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-black text-white mb-5"
               placeholder="Enter your password"
               name="password"
               required
@@ -114,9 +106,9 @@ const SignUp = () => {
         </form>
       </div>
 
-      <div className="hidden md:block md:w-1/2 bg-image h-full"></div>
+      <div className="bg-image"></div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
