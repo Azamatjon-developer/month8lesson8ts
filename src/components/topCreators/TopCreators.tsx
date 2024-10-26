@@ -6,7 +6,7 @@ import {
   useUnfollowMutation,
 } from '../../redux/api/user-slice'
 import { useState } from 'react'
-import { ClipLoader } from 'react-spinners' // react-spinners dan yuklanish uchun ClipLoader ni import qilamiz
+import { ClipLoader } from 'react-spinners' 
 
 const TopCreators = () => {
   const { data = [], isLoading: usersLoading } = useGetAllUsersQuery(true)
