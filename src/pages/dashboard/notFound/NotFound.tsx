@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom' // Assuming you're using React Router
+import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
-      <h1 className="text-[72px] font-bold text-white mb-4">404</h1>
+      <h1 className="text-[72px] font-bold text-white mb-[40px]">404 </h1>
       <h2 className="text-2xl md:text-3xl font-semibold mb-2">
         Page Not Found
       </h2>

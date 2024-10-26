@@ -22,7 +22,7 @@ const Profile = () => {
         <div className="flex flex-col lg:flex-row items-center gap-8 mb-[30px]">
           <div className="relative">
             {isLoading ? (
-              <Skeleton circle height={160} width={160} />
+              <Skeleton circle height={200} width={200} />
             ) : (
               <img
                 onError={(e) => (e.currentTarget.src = noImage)}
@@ -35,9 +35,9 @@ const Profile = () => {
           <div className="text-left">
             {isLoading ? (
               <>
-                <Skeleton height={36} width={200} className="mb-2" />
-                <Skeleton height={18} width={150} className="mb-[20px]" />
-                <Skeleton height={14} width={100} />
+                <Skeleton height={48} width={200} className="mb-[20px]" />
+                <Skeleton height={28} width={150} className="mb-[20px]" />
+                <Skeleton height={24} width={100} />
               </>
             ) : (
               <>
@@ -48,7 +48,7 @@ const Profile = () => {
                 )}
                 {data?.username && (
                   <p className="text-[#7878A3] text-[16px] sm:text-[18px] mb-[20px]">
-                    <span className="font-medium">Username: @</span>
+                    <span className="font-medium">Username:@</span>
                     {data.username}
                   </p>
                 )}
@@ -87,8 +87,8 @@ const Profile = () => {
                 <div className="p-4 shadow-lg">
                   <Skeleton height={200} className="rounded-lg" /> 
                   <div className="pt-[12px]">
-                    <Skeleton height={24} width={150} className="mb-2" /> 
-                    <Skeleton height={16} width={100} /> 
+                    <Skeleton height={28} width={150} className="mb-2" /> 
+                    <Skeleton height={20} width={100} /> 
                   </div>
                 </div>
               </div>

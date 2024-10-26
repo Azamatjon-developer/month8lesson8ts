@@ -6,8 +6,7 @@ import {
 import noImage from '../../../assets/images/noImage.jpg'
 import PostCard from '../../../components/main/PostCard'
 import { ClipLoader } from 'react-spinners'
-import Skeleton from 'react-loading-skeleton' 
-
+import Skeleton from 'react-loading-skeleton'
 const Home = () => {
   const { data: feed, isLoading: feedLoading } = useGetFeedQuery(true)
   const currentUsername =
@@ -17,12 +16,11 @@ const Home = () => {
   const { data: userData, isLoading: userLoading } = useGetUserByUsernameQuery(
     currentUsername,
   )
-
   if (feedLoading || userLoading) {
     return (
       <div className="flex flex-col items-center h-screen bg-black">
         <ClipLoader color="#877EFF" size={100} />
-        <h3 className="text-white text-xl pl-3">  Loading Home page ...</h3>
+        <h3 className="text-white text-xl pl-3"> Loading Home page ...</h3>
         <div className="flex flex-col items-center mt-10">
           <div className="flex flex-wrap items-center gap-5 pt-16">
             {Array.from({ length: 5 }).map((_, index) => (
@@ -38,10 +36,10 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10 px-4 md:px-10">
             {Array.from({ length: 3 }).map((_, index) => (
               <div key={index} className="rounded-lg w-full shadow-lg">
-                <Skeleton height={200} className="rounded-lg" /> 
+                <Skeleton height={200} className="rounded-lg" />
                 <div className="pt-3">
-                  <Skeleton height={24} width={150} className="mb-2" /> 
-                  <Skeleton height={16} width={100} /> 
+                  <Skeleton height={24} width={150} className="mb-2" />
+                  <Skeleton height={16} width={100} />
                 </div>
               </div>
             ))}
@@ -50,7 +48,6 @@ const Home = () => {
       </div>
     )
   }
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-12 md:col-span-9">
@@ -78,7 +75,9 @@ const Home = () => {
         </div>
 
         <div className="py-14 px-4 md:px-12">
-          <h2 className="font-bold text-white text-2xl md:text-3xl">Home Feed</h2>
+          <h2 className="font-bold text-white text-2xl md:text-3xl">
+            Home Feed
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-10 py-10 px-4 md:px-10">
@@ -91,7 +90,6 @@ const Home = () => {
           )}
         </div>
       </div>
-
       <div className="hidden md:block md:col-span-3">
         <TopCreators />
       </div>

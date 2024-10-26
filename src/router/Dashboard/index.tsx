@@ -22,7 +22,7 @@ const DashboardRoutes = () => {
           <Route path="/reels" element={<NotFound />} />
           <Route path="/chats" element={<NotFound />} />
           <Route path="/createPosts" element={<CreatePosts />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<NotFound />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/postProfile/:id/:username" element={<PostProfile />} />
           <Route path="/users/:username" element={<Users />} />

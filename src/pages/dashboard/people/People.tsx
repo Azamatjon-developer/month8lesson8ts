@@ -7,14 +7,12 @@ import {
 import userIcon from '../../../assets/images/UsersIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-
 const People = () => {
   const { data: users } = useGetAllUsersQuery({})
   const [followUser] = useFollowMutation()
   const [unfollowUser] = useUnfollowMutation()
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null)
   const [visibleUsers, setVisibleUsers] = useState<number>(20)
-
   const handleFollow = async (username: string) => {
     setLoadingUserId(username)
     try {
