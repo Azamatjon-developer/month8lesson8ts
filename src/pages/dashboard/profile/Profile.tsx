@@ -18,8 +18,8 @@ const Profile = () => {
 
   return (
     <div className="h-screen overflow-y-auto bg-black text-white">
-      <div className="w-full p-[40px] rounded-md shadow-lg pt-[60px] pl-[80px]">
-        <div className="flex items-center gap-8 mb-[30px]">
+      <div className="max-w-screen-lg mx-auto p-4 sm:p-6 lg:p-8 rounded-md shadow-lg">
+        <div className="flex flex-col lg:flex-row items-center gap-8 mb-[30px]">
           <div className="relative">
             {isLoading ? (
               <Skeleton circle height={160} width={160} />
@@ -42,12 +42,12 @@ const Profile = () => {
             ) : (
               <>
                 {data?.fullName && (
-                  <h3 className="text-[36px] font-bold mb-2 text-white">
+                  <h3 className="text-[28px] sm:text-[36px] font-bold mb-2 text-white">
                     {data.fullName}
                   </h3>
                 )}
                 {data?.username && (
-                  <p className="text-[#7878A3] text-[18px] mb-[20px]">
+                  <p className="text-[#7878A3] text-[16px] sm:text-[18px] mb-[20px]">
                     <span className="font-medium">Username: @</span>
                     {data.username}
                   </p>
@@ -59,7 +59,7 @@ const Profile = () => {
                 )}
               </>
             )}
-            <div className="flex items-center gap-8 mt-6">
+            <div className="flex flex-col sm:flex-row items-center gap-8 mt-6">
               <div className="text-center">
                 <p className="font-bold text-xl text-white">
                   {isLoading ? <Skeleton width={50} /> : data?.followers?.length || 0}
@@ -76,13 +76,13 @@ const Profile = () => {
           </div>
         </div>
 
-        <h2 className="text-white text-[30px] font-semibold mb-8">Posts</h2>
-        <div className="grid grid-cols-3 gap-6">
+        <h2 className="text-white text-[24px] sm:text-[30px] font-semibold mb-8">Posts</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {isLoading ? (
             Array.from({ length: 3 }).map((_, index) => (
               <div
                 key={index}
-                className="rounded-lg w-[90%] shadow-lg transform hover:scale-105 transition-transform duration-300"
+                className="rounded-lg w-full shadow-lg transform hover:scale-105 transition-transform duration-300"
               >
                 <div className="p-4 shadow-lg">
                   <Skeleton height={200} className="rounded-lg" /> 
@@ -97,7 +97,7 @@ const Profile = () => {
             posts?.map((post: any, index: number) => (
               <div
                 key={index}
-                className="rounded-lg w-[90%] shadow-lg transform hover:scale-105 transition-transform duration-300"
+                className="rounded-lg w-full shadow-lg transform hover:scale-105 transition-transform duration-300"
               >
                 <div className="p-4 shadow-lg">
                   {post?.content[0]?.type === 'IMAGE' ? (
@@ -108,7 +108,7 @@ const Profile = () => {
                     />
                   ) : (
                     <div>
-                      <video controls src={post?.content[0]?.url}></video>
+                      <video controls className="w-full rounded-lg" src={post?.content[0]?.url}></video>
                     </div>
                   )}
                   <div className="pt-[12px]">
