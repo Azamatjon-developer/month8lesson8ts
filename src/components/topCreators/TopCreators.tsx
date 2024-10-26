@@ -6,9 +6,10 @@ import {
   useUnfollowMutation,
 } from '../../redux/api/user-slice'
 import { useState } from 'react'
+import { ClipLoader } from 'react-spinners' // react-spinners dan yuklanish uchun ClipLoader ni import qilamiz
 
 const TopCreators = () => {
-  const { data = [] } = useGetAllUsersQuery(true)
+  const { data = [], isLoading: usersLoading } = useGetAllUsersQuery(true)
   const [followUser] = useFollowMutation()
   const [unfollowUser] = useUnfollowMutation()
   const navigate = useNavigate()
@@ -21,7 +22,8 @@ const TopCreators = () => {
       ? JSON.parse(window.localStorage.getItem('user-data') as string).username
       : null
 
-  const { data: userData } = useGetUserByUsernameQuery(currentusername)
+  const { data: userData, isLoading: userLoading } = useGetUserByUsernameQuery(currentusername)
+
   const handleFollowUser = async (username: string): Promise<void> => {
     setLoadingUserId(username)
     try {
@@ -30,6 +32,7 @@ const TopCreators = () => {
       setLoadingUserId(null)
     }
   }
+
   const handleUnfollowUser = async (username: string): Promise<void> => {
     setLoadingUserId(username)
     try {
@@ -39,15 +42,23 @@ const TopCreators = () => {
     }
   }
 
+  if (usersLoading || userLoading) {
+    return (
+      <div className="flex justify-between items-center h-screen bg-black">
+        <ClipLoader color="#877EFF" size={70} /> 
+      </div>
+    )
+  }
+
   return (
     <div className="col-span-3 text-white sticky top-0 h-screen overflow-y-auto">
-      <div className=" pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
+      <div className="pt-[48px] pl-[24px] pr-[24px] pb-[40px]">
         <h2 className="text-[#ffffff] text-[24px] font-bold leading-4">
           Top Creators
         </h2>
       </div>
 
-      <div className="flex flex-wrap gap-[20px] ">
+      <div className="flex flex-wrap gap-[20px]">
         {data.slice(0, usersToShow).map((user: any) => (
           <div className="" key={user._id}>
             <div className="border cursor-pointer flex flex-col gap-[44px] mb-[24px] border-slate-500 w-[190px] h-[190px] rounded-lg pt-[24px] pl-[34px] pr-[34px] pb-[24px] text-center">
@@ -76,7 +87,7 @@ const TopCreators = () => {
                     onClick={() => handleFollowUser(user.username)}
                     disabled={loadingUserId === user.username}
                   >
-                    {loadingUserId === user.username ? 'Loading' : 'Follow'}
+                    {loadingUserId === user.username ? 'Loading...' : 'Follow'}
                   </button>
                 )}
               </div>

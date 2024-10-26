@@ -8,19 +8,27 @@ const Profile = () => {
   const currentUsername = window.localStorage.getItem('userData')
     ? JSON.parse(window.localStorage.getItem('userData') as string).username
     : null
-  const { data } = useGetUserNameQuery(currentUsername)
-  const { data: posts } = useGetAllPostsQuery(currentUsername)
-  console.log(posts)
+
+  const { data, isLoading: isUserLoading } = useGetUserNameQuery(currentUsername)
+  const { data: posts, isLoading: isPostsLoading } = useGetAllPostsQuery(currentUsername)
+
+  if (isUserLoading || isPostsLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="text-white text-2xl">Loading...</div>
+      </div>
+    )
+  }
 
   return (
     <div className="h-screen overflow-y-auto bg-black text-white">
-      <div className="w-full p-[40px]  rounded-md shadow-lg pt-[60px] pl-[80px] ">
+      <div className="w-full p-[40px] rounded-md shadow-lg pt-[60px] pl-[80px]">
         <div className="flex items-center gap-8 mb-[30px]">
           <div className="relative">
             <img
               onError={(e) => (e.currentTarget.src = noImage)}
               src={data?.avatar || '/default-avatar.png'}
-              alt={data?.fullname}
+              alt={data?.fullName}
               className="w-[160px] h-[160px] rounded-full object-cover border-4 border-gray-700 shadow-xl transition-transform duration-300 hover:scale-110"
             />
           </div>
@@ -59,14 +67,14 @@ const Profile = () => {
         </div>
 
         <h2 className="text-white text-[30px] font-semibold mb-8">Posts</h2>
-        <div className="grid grid-cols-3 gap-6 ">
+        <div className="grid grid-cols-3 gap-6">
           {posts?.map((post: any, index: number) => (
             <div
               key={index}
-              className=" rounded-lg w-[90%] shadow-lg transform hover:scale-105 transition-transform duration-300"
+              className="rounded-lg w-[90%] shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
               <div className="p-4 shadow-lg">
-                {post?.content[0]?.type == 'IMAGE' ? (
+                {post?.content[0]?.type === 'IMAGE' ? (
                   <img
                     src={post?.content[0]?.url || noImage}
                     alt={post?.content_alt || 'Post image'}
@@ -77,7 +85,6 @@ const Profile = () => {
                     <video controls src={post?.content[0]?.url}></video>
                   </div>
                 )}
-
                 <div className="pt-[12px]">
                   <h3 className="text-xl font-semibold text-white mb-2 truncate">
                     {post?.content_alt || 'Untitled'}
