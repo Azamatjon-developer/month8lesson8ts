@@ -113,10 +113,10 @@ const Profile = () => {
                   )}
                   <div className="pt-[12px]">
                     <h3 className="text-xl font-semibold text-white mb-2 truncate">
-                      {post?.content_alt || 'Untitled'}
+                      {post?.content_alt || 'Content not found '}
                     </h3>
                     <p className="text-gray-400 mb-1">
-                      Location: {post?.location || 'Unknown'}
+                      Location: {post?.location || 'Location not found'}
                     </p>
                   </div>
                 </div>

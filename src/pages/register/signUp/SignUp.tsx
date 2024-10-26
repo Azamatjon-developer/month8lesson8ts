@@ -39,76 +39,73 @@ const SignUp = () => {
   }
 
   return (
-    <div className=" flex justify-center bg-black  ">
-      <div className=" w-[50%] pt-[218px] pl-[177px] pr-[143px]">
+    <div className="flex flex-col md:flex-row justify-center bg-black min-h-screen">
+      <div className="w-full md:w-1/2 pt-20 px-4 md:px-20 lg:px-32">
         <div>
-          <h2 className="text-[30px] font-bold pt-[12px] pb-[32px] text-white text-center">
-            Create a new account
-          </h2>
-          <p className="text-[#7878A3] text-center pv-[32px] text-[16px]">
-            To use snapgram, Please enter your details.
+          <h2 className="text-2xl font-bold text-white text-center mb-6">Create a new account</h2>
+          <p className="text-[#7878A3] text-center mb-8 text-lg">
+            To use Snapgram, please enter your details.
           </p>
         </div>
         <form
           onSubmit={handleFormSubmit}
-          className="w-[400px] mx-auto flex flex-col gap-[20px]"
+          className="w-full max-w-md mx-auto flex flex-col gap-5"
         >
-          <div className="placeholder:bg-black">
-            <label className="block text-[#EFEFEF] font-medium"> Name</label>
+          <div>
+            <label className="block text-[#EFEFEF] font-medium">Name</label>
             <input
               type="text"
-              className="mt-1 w-[400px] h-[48px] p-3 rounded-md outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
               placeholder="Enter your name"
               name="name"
+              required
             />
           </div>
 
           <div>
-            <label className="block text-[#EFEFEF] font-medium"> Email</label>
+            <label className="block text-[#EFEFEF] font-medium">Email</label>
             <input
               type="email"
-              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
               placeholder="Enter your email"
               name="email"
+              required
             />
           </div>
+
           <div>
-            <label className="block text-[#EFEFEF] font-medium">
-              {' '}
-              Username{' '}
-            </label>
+            <label className="block text-[#EFEFEF] font-medium">Username</label>
             <input
               type="text"
-              className="w-[400px] h-[48px] mt-[20px] p-3 rounded-sm outline-none bg-[#1F1F22] text-white"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white"
               placeholder="Enter your username"
               name="username"
+              required
             />
           </div>
+
           <div>
-            <label className="block text-[#EFEFEF] font-medium">
-              {' '}
-              Password{' '}
-            </label>
+            <label className="block text-[#EFEFEF] font-medium">Password</label>
             <input
               type="password"
-              className="mt-1 w-[400px] h-[48px] p-3 rounded-sm outline-none  bg-[#1F1F22] text-white mb-[20px]"
+              className="mt-1 w-full h-12 p-3 rounded-md outline-none bg-[#1F1F22] text-white mb-5"
               placeholder="Enter your password"
               name="password"
+              required
             />
           </div>
+
           <div>
-            <button className="bg-[#877EFF] text-[#FFFFFF] py-[13px] mb-[20px] w-[400px] cursor-pointer font-semibold rounded-md">
+            <button className="bg-[#877EFF] text-[#FFFFFF] py-3 mb-5 w-full cursor-pointer font-semibold rounded-md">
               {isLoading ? 'Loading...' : 'Sign Up'}
             </button>
-            <div className="flex items-center mb-[20px] gap-[15px] justify-center pt-[12px] py-[13px] bg-white w-[400px]">
-              <img src={Google} alt="google" />
-              <p className="text-[#1F1F22] font-semibold  ">
-                {' '}
-                Sign up with Google
-              </p>
+            <div className="flex items-center mb-5 gap-3 justify-center py-3 bg-white w-full rounded-md">
+              <img src={Google} alt="google" className="h-5" />
+              <p className="text-[#1F1F22] font-semibold">Sign up with Google</p>
             </div>
           </div>
-          <p className="text-[16px] text-[#EFEFEF] text-center">
+
+          <p className="text-lg text-[#EFEFEF] text-center">
             Already have an account?{' '}
             <a href="/login" className="text-[#877EFF] font-semibold">
               Log in
@@ -117,7 +114,7 @@ const SignUp = () => {
         </form>
       </div>
 
-      <div className="w-[50%] bg-image"></div>
+      <div className="hidden md:block md:w-1/2 bg-image h-full"></div>
     </div>
   )
 }

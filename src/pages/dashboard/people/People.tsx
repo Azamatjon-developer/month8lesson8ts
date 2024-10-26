@@ -13,7 +13,7 @@ const People = () => {
   const [followUser] = useFollowMutation()
   const [unfollowUser] = useUnfollowMutation()
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null)
-  const [visibleUsers, setVisibleUsers] = useState<number>(20)  
+  const [visibleUsers, setVisibleUsers] = useState<number>(20)
 
   const handleFollow = async (username: string) => {
     setLoadingUserId(username)
@@ -45,7 +45,7 @@ const People = () => {
   const navigate = useNavigate()
 
   const handleSeeMore = () => {
-    setVisibleUsers((prev) => prev + 10) 
+    setVisibleUsers((prev) => prev + 10)
   }
 
   return (
@@ -56,17 +56,26 @@ const People = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {users?.slice(0, visibleUsers).map((user: any) => (  // slice orqali ko'rsatiladigan userlarni cheklaymiz
+        {users?.slice(0, visibleUsers).map((user: any) => (
           <div
             key={user._id}
             className="w-[303px] h-[300px] border border-slate-500 p-5 rounded-lg shadow-lg text-white flex flex-col justify-between"
           >
-            <div onClick={() => navigate(`/postProfile`)} className="cursor-pointer">
-              <h2 className="text-xl font-semibold mb-2">Name: {user.fullName}</h2>
-              <h3 className="text-lg text-gray-400 mb-4">Username: {user.username}</h3>
+            <div
+              onClick={() => navigate(`/postProfile`)}
+              className="cursor-pointer"
+            >
+              <h2 className="text-xl font-semibold mb-2">
+                Name: {user.fullName}
+              </h2>
+              <h3 className="text-lg text-gray-400 mb-4">
+                Username: {user.username}
+              </h3>
             </div>
             <div className="mx-auto rounded-md">
-              {userData?.following?.some((item: any) => user._id === item._id) ? (
+              {userData?.following?.some(
+                (item: any) => user._id === item._id,
+              ) ? (
                 <button
                   onClick={() => handleUnfollow(user.username)}
                   disabled={loadingUserId === user.username}
@@ -88,7 +97,7 @@ const People = () => {
         ))}
       </div>
 
-      {visibleUsers < users?.length && (  
+      {visibleUsers < users?.length && (
         <div className="flex justify-center pt-10 pb-10">
           <button
             onClick={handleSeeMore}
