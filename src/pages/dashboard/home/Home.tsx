@@ -17,7 +17,6 @@ const Home = () => {
   return (
     <div className="grid grid-cols-12 bg-black h-screen overflow-y-auto">
       <div className="col-span-9">
-        <div className="">
           <div className="flex flex-wrap items-center pl-[53px] gap-5 pt-[60px] r">
             {userData?.following?.map((follow: any) => (
               <div key={follow._id}>
@@ -28,7 +27,7 @@ const Home = () => {
                     alt="User"
                   />
                 </div>
-                <div className="">
+                <div className="text-center">
                   <h3 className="text-white text-sm font-semibold pt-1 text-center">
                     {follow.username}
                   </h3>
@@ -47,7 +46,6 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </div>
       </div>
       <TopCreators />
     </div>

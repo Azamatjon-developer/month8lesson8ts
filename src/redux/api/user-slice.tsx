@@ -102,7 +102,8 @@ export const userApi = api.injectEndpoints({
     getCommentPostID: build.query({
       query: (id) => ({
         url: `api/comment/post/${id}`
-      })
+      }),
+      providesTags:[{type:"User"}]
     }),
     getPostByUserAndID: build.query({
       query:({username, id}) => ({
