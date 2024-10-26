@@ -49,17 +49,17 @@ const People = () => {
   }
 
   return (
-    <div className="bg-[#000000] pt-[80px] pl-[60px] h-screen overflow-y-auto">
+    <div className="bg-[#000000] pt-[80px] px-4 h-screen overflow-y-auto">
       <div className="flex items-center gap-4 text-white mb-8">
-        <img className="w-[50px]" src={userIcon} alt="Users Icon" />
-        <h2 className="text-[36px]">All users</h2>
+        <img className="w-[40px] md:w-[50px]" src={userIcon} alt="Users Icon" />
+        <h2 className="text-2xl md:text-[36px]">All users</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {users?.slice(0, visibleUsers).map((user: any) => (
           <div
             key={user._id}
-            className="w-[303px] h-[300px] border border-slate-500 p-5 rounded-lg shadow-lg text-white flex flex-col justify-between"
+            className="w-full h-[300px] border border-slate-500 p-5 rounded-lg shadow-lg text-white flex flex-col justify-between"
           >
             <div
               onClick={() => navigate(`/postProfile`)}
@@ -79,13 +79,13 @@ const People = () => {
                 <button
                   onClick={() => handleUnfollow(user.username)}
                   disabled={loadingUserId === user.username}
-                  className="bg-red-400 text-white pt-[10px] pb-[10px] pl-[33px] pr-[33px] rounded-md font-semibold"
+                  className="bg-red-400 text-white py-2 px-4 rounded-md font-semibold w-full"
                 >
                   {loadingUserId === user.username ? 'Loading...' : 'Unfollow'}
                 </button>
               ) : (
                 <button
-                  className="bg-[#877EFF] text-white font-semibold rounded-md pt-[10px] pb-[10px] pl-[33px] pr-[33px]"
+                  className="bg-[#877EFF] text-white font-semibold rounded-md py-2 px-4 w-full"
                   onClick={() => handleFollow(user.username)}
                   disabled={loadingUserId === user.username}
                 >
@@ -101,7 +101,7 @@ const People = () => {
         <div className="flex justify-center pt-10 pb-10">
           <button
             onClick={handleSeeMore}
-            className="bg-[#877EFF] text-white font-semibold py-[10px] px-[20px] rounded-md"
+            className="bg-[#877EFF] text-white font-semibold py-2 px-4 rounded-md"
           >
             See More
           </button>

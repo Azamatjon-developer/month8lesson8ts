@@ -2,6 +2,7 @@ import { useState } from 'react';
 import image from '../../../assets/images/Image.svg';
 import { useCreatePostMutation, useUploadFilesMutation } from '../../../redux/api/user-slice';
 import toast from 'react-hot-toast';
+import ClipLoader from 'react-spinners/ClipLoader'; 
 
 const CreatePosts = () => {
   const [uploadFiles, { isLoading: isUploading }] = useUploadFilesMutation();
@@ -185,7 +186,14 @@ const CreatePosts = () => {
           className="font-semibold py-[12px] px-[22px] my-[20px] mx-[20px] bg-[#877EFF] w-fit ml-auto rounded-lg"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Sharing...' : 'Share Post'}
+          {isSubmitting ? (
+            <div className="flex items-center justify-center">
+              <ClipLoader color="#ffffff" size={20} />
+              <span className="ml-2">Sharing...</span>
+            </div>
+          ) : (
+            'Share Post'
+          )}
         </button>
       </form>
     </div>
